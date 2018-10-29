@@ -7,7 +7,7 @@ Created on Wed Sep 26 00:49:13 2018
 """
 import sys
 import pymongo
-from urllib.parse import urlparse 
+from urllib.parse import urlparse
 import requests
 from parsers import GooseObj
 
@@ -41,12 +41,12 @@ class Article(object):
         self.download()
         self.parse()
         self.nlp()
-        
+
     def download(self):
         print(self.source_url + self.url)
         self.html = self.get_html(self.source_url + self.url)
         self.is_downloaded = True
-    
+
     def parse(self):
         if self.is_downloaded is False:
             raise Exception('You should download first!')
@@ -54,8 +54,9 @@ class Article(object):
         self.set_text(goose_obj.body_text)
         self.set_title(goose_obj.title)
         self.set_keywords(goose_obj.keywords)
+        self.set_top_img(goose_obj.top_img)
         self.is_parsed = True
-        
+
     def get_html(self,url):
         # retrieves the html for either a url or a response object
         try:
@@ -72,7 +73,7 @@ class Article(object):
         if not self.is_downloaded or not self.is_parsed:
             raise Exception('You should download and parse first!')
         #Todo
-        
+
     def set_text(self,text):
         self.text = text
 
@@ -82,7 +83,9 @@ class Article(object):
     def set_keywords(self,keywords):
         self.keywords = keywords
 
+    def set_top_img(self,top_img):
+        self.top_img = top_img
+
 if __name__ == '__main__':
     a = Article('www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html')
     a.download()
-

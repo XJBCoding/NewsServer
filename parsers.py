@@ -12,7 +12,7 @@ class GooseObj(object):
     """encapsulation of goose output"""
 
     def __init__(self, article):
-        g = goose3.Goose()
+        g = goose3.Goose({'enable_image_fetching': True})
 
         goose_obj = g.extract(raw_html=article.html)
         self.body_text = goose_obj.cleaned_text
@@ -20,3 +20,4 @@ class GooseObj(object):
         self.keywords = [w.strip() for w in keywords] # not actual keyw's
         self.title = goose_obj.title
         self.authors = goose_obj.authors
+        self.top_img = goose_obj.top_image.src
