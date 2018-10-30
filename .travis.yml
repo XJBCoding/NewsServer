@@ -11,3 +11,5 @@ before_script:
 
 script:
   - pytest -v
+after_failure:
+  - cat logs/log_travis.failure.txt
