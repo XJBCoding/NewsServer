@@ -33,6 +33,7 @@ class Article(object):
         self.text = None
         self.keywords = None
         self.tags = None
+        self.time = None
         self.is_parsed = False
         self.is_downloaded = False
 
@@ -55,6 +56,7 @@ class Article(object):
         self.set_title(goose_obj.title)
         self.set_keywords(goose_obj.keywords)
         self.set_top_img(goose_obj.top_img)
+        self.set_time(goose_obj.time)
         self.is_parsed = True
 
     def get_html(self,url):
@@ -85,6 +87,9 @@ class Article(object):
 
     def set_top_img(self,top_img):
         self.top_img = top_img
+
+    def set_time(self,time):
+        self.time = time
 
 if __name__ == '__main__':
     a = Article('www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html')

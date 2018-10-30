@@ -21,35 +21,31 @@ def index():
             'topImage': 1,
             'text': 1,
             'keywords': 1,
-            'tags': 1
+            'tags': 1,
+            'time': 1
             }):
             articles.append(item)
             hot_word = trending() # hot_word is a list
         print(articles)
-        # return json.dumps(articles)
         return render_template('articles.html', articles=articles)
     return 'You are not logged in'
 
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
-    # print('SEARCHING-------------------')
     if 'username' in session:
         payload = {'q': request.form['keyword'], 'from': '2018-10-20','sortBy': 'publishedAt', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
         r = requests.get('https://newsapi.org/v2/everything', params=payload)
-        # print(r.json())
         articles = []
-        # print(r.json()['articles'][0])
+        # TODO: make into Article objects as in update_index()
+        # This way, we can also have the time value for articles from search.
         for obj in r.json()['articles']:
             temp = {}
-            print(obj)
             temp['title'] = obj['title']
             temp['source'] = ''
             temp['url'] = obj['url']
             temp['topImage'] = obj['urlToImage']
             articles.append(temp)
-        # return json.dumps([r.json()])
-        print(articles)
         return render_template('articles.html', articles=articles)
     return 'You are not logged in'
 
@@ -120,7 +116,8 @@ def update_index():
             'topImage':article.top_img,
             'text':article.text,
             'keywords':article.keywords,
-            'tags': article.tags
+            'tags': article.tags,
+            'time': article.time
             })
     print('update finished!')
 
@@ -129,8 +126,8 @@ if __name__ == "__main__":
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     client = pymongo.MongoClient("mongodb+srv://amazon_ec2:1234@cluster0-avowj.mongodb.net/test?retryWrites=true")
     db = client["newsapp"]
-    # update_index()
+    update_index()
     app.run(host="0.0.0.0", port=80)
     # the code below is executed if the request method
     # was GET or the credentials were invalid
-    #return render_template('login.html', error=error)
+    # return render_template('login.html', error=error)
