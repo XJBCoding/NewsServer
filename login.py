@@ -3,6 +3,7 @@ import Article
 import requests
 import pymongo
 import json
+from xml.etree import ElementTree
 app = Flask(__name__)
 app.secret_key = '(*&^!@#*123987'
 
@@ -17,12 +18,13 @@ def index():
             'source': 1,
             'title': 1,
             'url': 1,
-            'topImage':1,
+            'topImage': 1,
             'text': 1,
             'keywords': 1,
             'tags': 1
             }):
             articles.append(item)
+            hot_word = trending() # hot_word is a list
         print(articles)
         # return json.dumps(articles)
         return render_template('articles.html', articles=articles)
@@ -90,6 +92,17 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
+
+def trending():
+    TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
+    r = requests.get(TRENDING_URL)
+    root = ElementTree.fromstring(r.content)
+    res = []
+    for channel in root[0].findall('item'):
+        res.append(channel.find('title').text)
+    return res
+
+
 def update_index():
     print('updating main page...')
     payload = {'country': 'US', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
@@ -112,6 +125,8 @@ def update_index():
     print('update finished!')
 
 if __name__ == "__main__":
+    TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     client = pymongo.MongoClient("mongodb+srv://amazon_ec2:1234@cluster0-avowj.mongodb.net/test?retryWrites=true")
     db = client["newsapp"]
     # update_index()
