@@ -2,40 +2,29 @@
 {% block content %}
 <div class="jumbo">
   <h2>Welcome to the Big News</h2>
+  {% if hot_words %}
     <h3>Trending topics</h3>
       <div id="trending" class="container">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="topic">May</div>
-            <div class="topic">Climate Change</div>
-          </div>
-          <div class="col-md-3">
-            <div class="topic">Retirement</div>
-            <div class="topic">Yuanji</div>
-          </div>
-          <div class="col-md-3">
-            <div class="topic">Siyang</div>
-              <div class="topic">Halloween</div>
-          </div>
-          <div class="col-md-3">
-            <div class="topic">Vivien</div>
-              <div class="topic">Student Debt</div>
-              </div>
-        </div>
+        {% for word in hot_words %}
+          {% if loop.index0 % 4 == 0 %} <div class="row"> {% endif %}
+          <div class="col-md-3 trending-word">{{ word }}</div>
+          {% if loop.index0 % 4 == 3 %} </div> {% endif %}
+        {% endfor %}
     </div>
+  {% endif %}
 
-      <h3>Or search for new articles...</h3>
-        <form id="search-form" action="/search" method="POST" role="form" style="display: block;">
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search for articles..." value="">
-              <div class="input-group-append">
-                <span class="btn btn-primary" id="submit-btn">Search</span>
-              </div>
-            </div>
+  <h3>Or search for new articles...</h3>
+    <form id="search-form" action="/search" method="POST" role="form" style="display: block;">
+      <div class="form-group">
+        <div class="input-group mb-3">
+          <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Search for articles..." value="">
+          <div class="input-group-append">
+            <span class="btn btn-primary" id="submit-btn">Search</span>
           </div>
-        </form>
+        </div>
       </div>
+    </form>
+  </div>
 
 <div class="card-columns">
 {% for article in articles %}

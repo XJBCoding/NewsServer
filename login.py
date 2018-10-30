@@ -26,8 +26,7 @@ def index():
             }):
             articles.append(item)
             hot_word = trending() # hot_word is a list
-        print(articles)
-        return render_template('articles.html', articles=articles)
+        return render_template('articles.html', articles=articles, hot_words=hot_word)
     return 'You are not logged in'
 
 
