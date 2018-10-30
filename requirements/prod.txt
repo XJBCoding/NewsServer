@@ -1,0 +1,5 @@
+flask
+pymongo
+goose3
+requests
+dnspython
