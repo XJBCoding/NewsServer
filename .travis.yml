@@ -10,4 +10,4 @@ before_script:
   - export FLASK_DEBUG=1
 
 script:
-  - pytest -v
+  - pytest -v > logs/log_travis.txt
