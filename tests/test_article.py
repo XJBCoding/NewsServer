@@ -1,35 +1,32 @@
 """
 This test checks parsing functionality of the Article class
 """
-import os
-import sys
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
 import requests
+
+import os,sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 import Article
 
-def test_init():
+def init_test():
     """
     This test ensures that an Article object is initialized
     and the url is parsed correctly
     """
     url = 'www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html'
-    article = Article.Article(url)
+    article = Article(url)
     assert article
-    assert article.source_url == 'http://www.cnn.com'
+    assert article.source_url == 'www.cnn.com'
     assert article.url == '/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html'
 
-def test_time():
+def time_test():
     """ This test ensures that the time estimate is reasonable """
     url = 'www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html'
-    article = Article.Article(url)
-    article.build()
-    assert article.time
+    article = Article(url)
     assert article.time > 0 and article.time <= 5
 
-def test_top_img():
+def top_img_test():
     """ This ensures that the top image url exists """
     url = 'www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html'
-    article = Article.Article(url)
-    article.build()
+    article = Article(url)
     request = requests.get(article.source_url + article.url)
     assert request.status_code == 200

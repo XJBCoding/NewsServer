@@ -1,5 +1,5 @@
 from flask import Flask, request, session, redirect, url_for, render_template
-import Article
+from Article import Article
 import requests
 import pymongo
 import json
@@ -13,7 +13,7 @@ def index():
     if 'username' in session:
         index_articles = db["index_articles"]
         articles = []
-        for item in index_articles.find({},{
+        for item in index_articles.find({}, {
             "_id": 0,
             'source': 1,
             'title': 1,
@@ -25,8 +25,8 @@ def index():
             'time': 1
             }):
             articles.append(item)
-            hot_word = trending() # hot_word is a list
-        return render_template('articles.html', articles=articles, hot_words=hot_word)
+            hot_word = trending() # hot_word is a dictionary, element:{word: weight}
+        return render_template('articles.html', articles=articles, hot_words=hot_word.keys())
     return 'You are not logged in'
 
 
@@ -92,9 +92,14 @@ def trending():
     TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
     r = requests.get(TRENDING_URL)
     root = ElementTree.fromstring(r.content)
-    res = []
+    res = {}
     for channel in root[0].findall('item'):
-        res.append(channel.find('title').text)
+        tem = channel.find('{https://trends.google.com/trends/hottrends}approx_traffic').text.split('+')[0]
+        tem = tem.split(',')
+        weight = ''
+        for i in tem:
+            weight += i
+        res[channel.find('title').text] = int(weight)
     return res
 
 
@@ -106,7 +111,7 @@ def update_index():
     index_articles = db["index_articles"]
     index_articles.delete_many({})
     for item in raw_json['articles']:
-        article = Article.Article(item['url'])
+        article = Article(item['url'])
         article.build()
         index_articles.insert_one({
             'source': article.source_url,
