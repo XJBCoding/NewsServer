@@ -5,7 +5,7 @@ import os
 import sys
 import unittest
 import requests
-from Article import Article
+import Article
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
@@ -20,7 +20,7 @@ class ArticleTestCase(unittest.TestCase):
 
     def setUp(self):
         """called before the first test case of this unit begins"""
-        self.article = Article(
+        self.article = Article.Article(
             'www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html')
 
     def tearDown(self):
@@ -48,7 +48,7 @@ class ArticleTestCase(unittest.TestCase):
         AUTHOR = []
         self.article.download()
         self.article.parse()
-        assert self.article.top_img == TOP_IMG
+        assert self.article.top_image == TOP_IMG
         assert self.article.title == TITLE
         assert self.article.keywords == KEYWORDS
         assert self.article.author == AUTHOR
