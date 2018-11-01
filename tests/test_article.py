@@ -49,7 +49,7 @@ class ArticleTestCase(unittest.TestCase):
         AUTHOR = []
         self.article.download()
         self.article.parse()
-        assert self.article.top_img == TOP_IMG
+        assert self.article.top_image == TOP_IMG
         assert self.article.title == TITLE
         assert self.article.keywords == KEYWORDS
         assert self.article.author == AUTHOR
