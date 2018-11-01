@@ -17,6 +17,8 @@ def test_init():
     assert article
     assert article.source_url == 'http://www.cnn.com'
     assert article.url == '/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html'
+    request = requests.get(article.source_url + article.url)
+    assert request.status_code == 200
 
 def test_time():
     """ This test ensures that the time estimate is reasonable """
@@ -26,10 +28,10 @@ def test_time():
     assert article.time
     assert article.time > 0 and article.time <= 5
 
-def test_top_img():
+def test_top_image():
     """ This ensures that the top image url exists """
     url = 'www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html'
     article = Article.Article(url)
     article.build()
-    request = requests.get(article.source_url + article.url)
+    request = requests.get(article.top_image)
     assert request.status_code == 200

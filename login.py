@@ -112,7 +112,7 @@ def update_index():
             'source': article.source_url,
             'title': article.title,
             'url': article.url,
-            'topImage':article.top_img,
+            'topImage':article.top_image,
             'text':article.text,
             'keywords':article.keywords,
             'tags': article.tags,

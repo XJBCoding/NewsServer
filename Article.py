@@ -29,7 +29,7 @@ class Article(object):
         self.url = url
         self.html = None
         self.source_url = source_url
-        self.top_img = None
+        self.top_image = None
         self.text = None
         self.keywords = None
         self.tags = None
@@ -55,7 +55,8 @@ class Article(object):
         self.set_text(goose_obj.body_text)
         self.set_title(goose_obj.title)
         self.set_keywords(goose_obj.keywords)
-        self.set_top_img(goose_obj.top_img)
+        if goose_obj.top_image:
+            self.set_top_image(goose_obj.top_image)
         self.set_time(goose_obj.time)
         self.is_parsed = True
 
@@ -85,8 +86,8 @@ class Article(object):
     def set_keywords(self,keywords):
         self.keywords = keywords
 
-    def set_top_img(self,top_img):
-        self.top_img = top_img
+    def set_top_image(self,top_image):
+        self.top_image = top_image
 
     def set_time(self,time):
         self.time = time

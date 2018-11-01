@@ -20,6 +20,9 @@ class GooseObj(object):
         self.keywords = [w.strip() for w in keywords] # not actual keyw's
         self.title = goose_obj.title
         self.authors = goose_obj.authors
-        self.top_img = goose_obj.top_image.src
+        if goose_obj.top_image:
+            self.top_image = goose_obj.top_image.src
+        else:
+            self.top_image = None
         word_count = len(self.body_text.split())
         self.time = round(word_count/200.0,1)
