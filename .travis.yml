@@ -1,13 +1,17 @@
-sudo: false  # http://docs.travis-ci.com/user/migrating-from-legacy/
+sudo: false
 language: python
 python:
-  - 3.4
-  - 3.5
-  - 3.6
+- 3.4
+- 3.5
+- 3.6
 install: pip install -r requirements/dev.txt
 before_script:
-  - export FLASK_APP="$TRAVIS_BUILD_DIR/login.py"
-  - export FLASK_DEBUG=1
-
+- export FLASK_APP="$TRAVIS_BUILD_DIR/login.py"
+- export FLASK_DEBUG=1
 script:
-  - pytest -v
+- pytest -v
+after_success:
+- .travis/push.sh
+env:
+  global:
+    secure: 1D5eq6F3UaPaba6VCapeAQKOmlvxC2+26uiSJTXXEhBSuunuaFWCJ7xCS0e+7Cj6XO2S+xZxJ/5f8VWrgQHmJZMAt5RAD7WClrH1sEmEr2M62JRxGu5K5fbIkQp2mckbwHliNnXb2ATfiMoqi5NoPTE6ZKSz1QSEU8IrR0dcB+bYTX1z+nRKyOYX5x6fM4Fy9LVL3K/ADJq+z8RtDfhOyy74SoiS4DEDGiKUktwHxTcyv4o/67M6cuwq9u5XwyOom4n6FfriwcSOvPDRpmmg2mGISSBKqRahqQ0WiT+mJfZ/cmyIqWwOxcf4RG7XqnOdfnAOgxB5AT7gtCRpUb5yD1IaS/ALnw8HMzqqaYK4h2g7hagzq4drTb1TTjTUSKQ33cpZHXGphhlz2qwAir5Oif5lzf5SmBxB4bfYuDOA614D6MfCRTgAmc0jfVGkn5GG3VIxtMsEmPezUBGeQD3GMT/h28ZfFo8ApYt2n+9IEpNHmWXQ215d7bCQEE5fAFsQKnGm/kviSlwQY0B8rMrekGZ2g+i8B8pwbtaZESuViA9JQxO5BMRCxTO96ICZZl8pSg2yAwx3TM0o5W0B/mm3uMReBnT7SZkVqU8v3fvhHLFwwOhyZaJkd5G0DCjS16aghguCRfQ412BZc70GorWFlzCwaN8jlU57H9yTD6tKvGE=
