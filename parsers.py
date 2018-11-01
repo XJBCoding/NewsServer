@@ -10,10 +10,8 @@ import goose3
 
 class GooseObj(object):
     """encapsulation of goose output"""
-
     def __init__(self, article):
         g = goose3.Goose({'enable_image_fetching': True})
-
         goose_obj = g.extract(raw_html=article.html)
         self.body_text = goose_obj.cleaned_text
         keywords = goose_obj.meta_keywords.split(',')
