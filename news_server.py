@@ -10,7 +10,7 @@ def create_app():
     app.config.from_mapping(SECRET_KEY='sd*&^!@#*123987')
     client = pymongo.MongoClient("mongodb+srv://news:123@cluster0-avowj.mongodb.net/test?retryWrites=true")
     db = client["newsapp"]
-    update_index(db)
+    #update_index(db)
 
     @app.route('/')
     def index():

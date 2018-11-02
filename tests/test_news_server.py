@@ -16,6 +16,6 @@ class FlaskClientTest(unittest.TestCase):
     def tearDown(self):
         self.app_context.pop()
 
-    def test(self):
+    def test_login_invalid_info(self):
         resp = self.client.post('/login',data = {'username':'123','password':'123'})
-        assert resp == 'Invalid username/password'
+        assert b'Invalid username/password' in resp.data
