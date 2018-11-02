@@ -6,10 +6,10 @@ python:
 - 3.6
 install: pip install -r requirements/dev.txt
 before_script:
-- export FLASK_APP="$TRAVIS_BUILD_DIR/login.py"
+- export FLASK_APP="$TRAVIS_BUILD_DIR/news_server.py"
 - export FLASK_DEBUG=1
 script:
-- pytest -v
+- sudo pytest -v
 after_success:
 - .travis/push.sh
 env:
