@@ -1,4 +1,4 @@
-sudo: false
+sudo: True
 language: python
 python:
 - 3.4
@@ -9,7 +9,7 @@ before_script:
 - export FLASK_APP="$TRAVIS_BUILD_DIR/news_server.py"
 - export FLASK_DEBUG=1
 script:
-- sudo pytest -v
+- pytest -v
 after_success:
 - .travis/push.sh
 env:
