@@ -31,7 +31,7 @@ def create_app():
                 articles.append(item)
                 hot_word = trending() # hot_word is a dictionary, element:{word: weight}
             return render_template('articles.html', articles=articles, hot_words=hot_word.keys())
-        return 'You are not logged in'
+        return render_template('login.html')
 
     @app.route('/search', methods=['POST', 'GET'])
     def search():
@@ -130,3 +130,8 @@ def update_index(db):
 # the code below is executed if the request method
 # was GET or the credentials were invalid
 # return render_template('login.html', error=error)
+
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run()
