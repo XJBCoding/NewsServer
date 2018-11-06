@@ -1,4 +1,4 @@
 #!/bin/sh
 # Simple pre-commit script that runs the test suite.
 
-pytest
+pytest | tee logs/precommit_log.txt
