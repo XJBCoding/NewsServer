@@ -40,7 +40,6 @@ class ArticleTestCase(unittest.TestCase):
         self.article.download()
 
         assert len(self.article.html) > 5000
-        assert False
 
     def test_parse_html(self):
         """check whether parser function can use GooseObj correctly"""
