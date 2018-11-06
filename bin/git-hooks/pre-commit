@@ -1,0 +1,4 @@
+#!/bin/sh
+# Simple pre-commit script that runs the test suite.
+
+pytest
