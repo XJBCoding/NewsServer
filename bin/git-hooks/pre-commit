@@ -1,4 +1,4 @@
 #!/bin/sh
 # Simple pre-commit script that runs the test suite.
-
-py.test --cov=. tests/ | tee logs/precommit_log.txt
+pylint *.py | tee logs/pylint_log.txt
+py.test --cov=. tests/ | tee logs/pytest_log.txt
