@@ -36,7 +36,7 @@ def create_app():
     @app.route('/search', methods=['POST', 'GET'])
     def search():
         if 'username' in session:
-            payload = {'q': request.form['keyword'], 'from': '2018-10-20','sortBy': 'publishedAt', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+            payload = {'q': request.form['keyword'], 'from': '2018-11-25','sortBy': 'publishedAt', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
             articles = []
             # TODO: make into Article objects as in update_index()
@@ -96,11 +96,12 @@ def trending():
     root = ElementTree.fromstring(r.content)
     res = {}
     for channel in root[0].findall('item'):
-        tem = channel.find('{https://trends.google.com/trends/hottrends}approx_traffic').text.split('+')[0]
-        tem = tem.split(',')
-        weight = ''
-        for i in tem:
-            weight += i
+        weight=100
+    #     tem = channel.find('{https://trends.google.com/trends/hottrends}approx_traffic').text.split('+')[0]
+    #     tem = tem.split(',')
+    #     weight = ''
+    #     for i in tem:
+    #         weight += i
         res[channel.find('title').text] = int(weight)
     return res
 
