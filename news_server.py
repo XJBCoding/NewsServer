@@ -4,6 +4,7 @@ import requests
 import pymongo
 from xml.etree import ElementTree
 
+articles = []
 
 def create_app():
     app = Flask(__name__)
@@ -36,7 +37,7 @@ def create_app():
     @app.route('/search', methods=['POST', 'GET'])
     def search():
         if 'username' in session:
-            payload = {'q': request.form['keyword'], 'sources': request.form['sources'], 'from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+            payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
             articles = []
             # TODO: make into Article objects as in update_index()
@@ -47,6 +48,7 @@ def create_app():
                 temp['source'] = ''
                 temp['url'] = obj['url']
                 temp['topImage'] = obj['urlToImage']
+                temp['text'] = obj['content']
                 articles.append(temp)
             return render_template('articles.html', articles=articles)
         return 'You are not logged in'
@@ -55,6 +57,7 @@ def create_app():
     def search_source(data):
         if 'username' in session:
             # add data (URL to article) to user history
+            print("add history")
         return 'You are not logged in'    
 
     @app.route('/login', methods=['POST', 'GET'])
