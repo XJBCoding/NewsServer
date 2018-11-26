@@ -36,7 +36,25 @@ def create_app():
     @app.route('/search', methods=['POST', 'GET'])
     def search():
         if 'username' in session:
-            payload = {'q': request.form['keyword'], 'from': '2018-11-25','sortBy': 'publishedAt', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+            payload = {'q': request.form['keyword'], 'from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+            r = requests.get('https://newsapi.org/v2/everything', params=payload)
+            articles = []
+            # TODO: make into Article objects as in update_index()
+            # This way, we can also have the time value for articles from search.
+            for obj in r.json()['articles']:
+                temp = {}
+                temp['title'] = obj['title']
+                temp['source'] = ''
+                temp['url'] = obj['url']
+                temp['topImage'] = obj['urlToImage']
+                articles.append(temp)
+            return render_template('articles.html', articles=articles)
+        return 'You are not logged in'
+
+    @app.route('/search-source', methods=['POST', 'GET'])
+    def search_source():
+        if 'username' in session:
+            payload = {'sources': request.form['keyword'], 'from': '2018-11-25','sortBy': 'publishedAt', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
             articles = []
             # TODO: make into Article objects as in update_index()
