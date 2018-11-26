@@ -54,10 +54,10 @@ def create_app():
         return 'You are not logged in'
 
     @app.route('/add-history', methods=['POST'])
-    def search_source(data):
+    def add_history():
         if 'username' in session:
-            # add data (URL to article) to user history
-            print("add history")
+            # TODO: add data (URL to article) to user history in MongoDB
+            print("clicked: ", request.form['url'])
         return 'You are not logged in'    
 
     @app.route('/login', methods=['POST', 'GET'])

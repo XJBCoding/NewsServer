@@ -34,11 +34,9 @@
       <center><button id="submit-btn" class="btn btn-outline-primary" type="submit">
         Search
       </button></center>
-      </div>
-
-
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
 
 
 
@@ -61,8 +59,15 @@
 
 <script>
 $("a.card").click(function() { // or $("input#<input id, if it has one>")...
-  var href = $('a').attr('href');
-  $.post('/add-history', href);
+  var href = $(this).attr('href');
+  console.log(href);
+  // $.ajax({
+  //   type: 'POST',
+  //   url: '/add-history',
+  //   datatype:'json',
+  //   data: {'url': href}
+  // });
+  $.post('/add-history', {'url': href});
 });
 </script>
 
