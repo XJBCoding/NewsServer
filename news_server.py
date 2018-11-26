@@ -69,6 +69,12 @@ def create_app():
             return render_template('articles.html', articles=articles)
         return 'You are not logged in'
 
+    @app.route('/add-history', methods=['POST'])
+    def search_source(data):
+        if 'username' in session:
+            # add data (URL to article) to user history
+        return 'You are not logged in'    
+
     @app.route('/login', methods=['POST', 'GET'])
     def login():
         if request.method == 'POST':

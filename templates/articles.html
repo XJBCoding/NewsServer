@@ -42,4 +42,11 @@
 {% endfor %}
 </div>
 
+<script>
+$("a.card").click(function() { // or $("input#<input id, if it has one>")...
+  var href = $('a').attr('href');
+  $.post('/add-history', href);
+});
+</script>
+
 {% endblock %}
