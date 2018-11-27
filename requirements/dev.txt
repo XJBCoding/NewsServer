@@ -5,7 +5,6 @@ git-pylint-commit-hook
 
 # Testing
 pytest
-WebTest
-factory-boy
+pytest-cov
+
 # For python 3
-Faker
