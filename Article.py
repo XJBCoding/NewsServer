@@ -57,7 +57,11 @@ class Article(object):
     def parse(self):
         if self.is_downloaded is False:
             raise Exception('You should download first!')
-        goose_obj = GooseObj(self)
+        try:
+            goose_obj = GooseObj(self)
+        except:
+            print ('[REQUEST FAILED]')
+            return u''
         self.set_text(goose_obj.body_text)
         self.set_title(goose_obj.title)
         self.set_keywords(goose_obj.keywords)
