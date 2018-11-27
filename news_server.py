@@ -46,8 +46,10 @@ def create_app():
         refreshThread = threading.Timer(POOL_TIME, doStuff, ())
         refreshThread.start()
 
-    # Initiate
-    doStuffStart()
+    # WARNING
+
+    #doStuffStart()
+
     # When you kill Flask (SIGTERM), clear the trigger for the next thread
     atexit.register(interrupt)
 
