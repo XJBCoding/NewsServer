@@ -58,9 +58,9 @@ def print_top_words(params,vocab):
 def load_data():
     data = []
     labels = []
-    categories = ['tech','business','entertainment','politics','sport']
+    categories = ['technology','business','entertainment','general','sports','health','science']
     for category in categories:
-        mypath = join('./bbc',category)
+        mypath = join('./testSet',category)
         for f in listdir(mypath):
             try:
                 row = []
@@ -100,7 +100,8 @@ def construct_dic(text):
     return (log_idf,mapping)            
 
 def tokenize(data,labels,mapping):
-    labels_mapping = {'tech':0,'business':1,'entertainment':2,'politics':3,'sport':4}
+    labels_mapping = {'technology':0,'business':1,'entertainment':2,
+                      'general':3,'sports':4,'health':5,'science':6}
     n = len(labels)
     d = len(mapping)
     x = np.zeros((n,d), dtype='int')
@@ -136,6 +137,7 @@ if __name__ == '__main__':
     pred = predict(params1,X_train) # predictions on training data
     val_pred = predict(params1,X_val) # predictions on test data
     np.save('model.npy', params1) 
+    np.save('dictionary.npy', mapping) 
     #read_dictionary = np.load('model.npy').item()
-    #print('training error rate: %g' % np.mean(pred != y_train))
-    #print('test error rate: %g' % np.mean(val_pred != y_val))
+    print('training error rate: %g' % np.mean(pred != y_train))
+    print('test error rate: %g' % np.mean(val_pred != y_val))

@@ -23,12 +23,12 @@ def create_app():
     app.config.from_mapping(SECRET_KEY='sd*&^!@#*123987')
     client = pymongo.MongoClient("mongodb+srv://news:123@cluster0-avowj.mongodb.net/test?retryWrites=true")
     db = client["newsapp"]
+    # Refresh main page when starting server, use this code
     #update_index(db)
 
     def interrupt():
         global refreshThread
-        pass
-        #refreshThread.cancel()
+        refreshThread.cancel()
 
     def doStuff():
         global commonDataStruct
@@ -47,12 +47,11 @@ def create_app():
         refreshThread = threading.Timer(POOL_TIME, doStuff, ())
         refreshThread.start()
 
-    # WARNING
-
+    # Refresh main page periodically, use this code
     #doStuffStart()
+    #atexit.register(interrupt)
 
-    # When you kill Flask (SIGTERM), clear the trigger for the next thread
-    atexit.register(interrupt)
+
 
 
     @app.route('/')

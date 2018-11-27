@@ -14,15 +14,11 @@ from Article import Article
 
 class ModelTestCase(unittest.TestCase):
     def runTest(self):
-        self.test_url()
-        self.test_source_url()
-        self.test_download_html()
-        self.test_parse_html()
+        self.test_model()
 
     def setUp(self):
         """called before the first test case of this unit begins"""
-        self.a1 = Article(
-            'www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html')
+        self.a1 = Article('https://www.huffingtonpost.com/entry/ariana-grandes-thank-u-next-trailer-is-all-mean-girls-pete-davidson_us_5bfd49d4e4b0771fb6be205e')
         self.a1.build()
 
 
@@ -31,4 +27,4 @@ class ModelTestCase(unittest.TestCase):
         pass
 
     def test_model(self):
-        assert self.a1.category == 'sport'
+        assert self.a1.category == 'entertainment'

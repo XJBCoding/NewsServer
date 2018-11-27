@@ -88,7 +88,7 @@ class Article(object):
         self.set_category(result[0])
 
     def set_category(self, cat):
-        mapping_list = ['tech','business','entertainment','politics','sport']
+        mapping_list = ['technology','business','entertainment','general','sports','health','science']
         self.category = mapping_list[cat-1]
 
     def set_text(self,text):
