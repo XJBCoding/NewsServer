@@ -3,3 +3,6 @@ pymongo
 goose3
 requests
 dnspython
+scipy
+numpy
+sklearn
