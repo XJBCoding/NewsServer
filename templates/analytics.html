@@ -6,7 +6,12 @@
 </div>
 
 <h3>Reading time...</h3>
-<div></div>
+
+{%  for time in times %}
+<div>
+	<p>{{ time.date }}: {{time.mins }} minutes<p>
+</div>
+{% endfor %} 
 
 
 {% endblock %}

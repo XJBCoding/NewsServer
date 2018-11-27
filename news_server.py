@@ -3,6 +3,7 @@ from Article import Article
 import requests
 import pymongo
 from xml.etree import ElementTree
+from datetime import date, timedelta
 
 articles = []
 
@@ -55,10 +56,20 @@ def create_app():
 
     @app.route('/add-history', methods=['POST'])
     def add_history():
-        if 'username' in session:
-            # TODO: add data (URL to article) to user history in MongoDB
-            print("clicked: ", request.form['url'])
-        return 'You are not logged in'    
+        # if 'username' in session:
+            # TODO: add data (URL to article? time?) to user history in MongoDB
+        print("clicked: ", request.form['url'])
+        print(request.form['mins'], " mins")
+        # return 'You are not logged in'
+
+    @app.route('/analytics')
+    def analytics():
+        times = []
+        times.append({'date': date.today().strftime('%m-%d-%y'), 'mins': 40})
+        yesterday = date.today() - timedelta(1)
+        times.append({'date': yesterday.strftime('%m-%d-%y'), 'mins': 50})
+        # return render_template('analytics.html')
+        return render_template('analytics.html', times=times)
 
     @app.route('/login', methods=['POST', 'GET'])
     def login():

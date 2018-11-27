@@ -44,7 +44,7 @@
 <div class="card-columns">
 {% for article in articles %}
   {% if article.title %}
-    <a class="card" href= '{{ article.source }}{{ article.url }}' >
+    <a class="card" href= '{{ article.source }}{{ article.url }}' data-mins={{ article.time }} >
       {% if article.topImage %} <img class="card-img-top" src='{{ article.topImage }}'> {% endif %}
       <div class="card-body">
         <h5 class="card-title">{{ article.title }}</h5>
@@ -58,16 +58,11 @@
 </div>
 
 <script>
-$("a.card").click(function() { // or $("input#<input id, if it has one>")...
+$("a.card").click(function() {
   var href = $(this).attr('href');
+  var mins = $(this).data('mins');
   console.log(href);
-  // $.ajax({
-  //   type: 'POST',
-  //   url: '/add-history',
-  //   datatype:'json',
-  //   data: {'url': href}
-  // });
-  $.post('/add-history', {'url': href});
+  $.post('/add-history', {'url': href, 'mins': mins});
 });
 </script>
 
