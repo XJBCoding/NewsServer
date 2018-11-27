@@ -27,7 +27,8 @@ def create_app():
 
     def interrupt():
         global refreshThread
-        refreshThread.cancel()
+        pass
+        #refreshThread.cancel()
 
     def doStuff():
         global commonDataStruct
