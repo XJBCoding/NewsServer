@@ -4,8 +4,19 @@ import requests
 import pymongo
 from xml.etree import ElementTree
 from datetime import date, timedelta
+import threading
+import atexit
 
 articles = []
+
+POOL_TIME = 120 #Seconds
+
+# variables that are accessible from anywhere
+commonDataStruct = {}
+# lock to control access to variable
+dataLock = threading.Lock()
+# thread handler
+refreshThread = threading.Thread()
 
 def create_app():
     app = Flask(__name__)
@@ -13,6 +24,33 @@ def create_app():
     client = pymongo.MongoClient("mongodb+srv://news:123@cluster0-avowj.mongodb.net/test?retryWrites=true")
     db = client["newsapp"]
     #update_index(db)
+
+    def interrupt():
+        global refreshThread
+        refreshThread.cancel()
+
+    def doStuff():
+        global commonDataStruct
+        global refreshThread
+        with dataLock:
+        # Do your stuff with commonDataStruct Here
+            update_index(db)
+        # Set the next thread to happen
+        refreshThread = threading.Timer(POOL_TIME, doStuff, ())
+        refreshThread.start()
+
+    def doStuffStart():
+        # Do initialisation stuff here
+        global refreshThread
+        # Create your thread
+        refreshThread = threading.Timer(POOL_TIME, doStuff, ())
+        refreshThread.start()
+
+    # Initiate
+    doStuffStart()
+    # When you kill Flask (SIGTERM), clear the trigger for the next thread
+    atexit.register(interrupt)
+
 
     @app.route('/')
     def index():
@@ -145,6 +183,7 @@ def update_index(db):
             'text':article.text,
             'keywords':article.keywords,
             'tags': article.tags,
+            'category': article.category,
             'time': article.time
             })
     print('update finished!')

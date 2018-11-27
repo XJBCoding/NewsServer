@@ -10,7 +10,8 @@ import pymongo
 from urllib.parse import urlparse
 import requests
 from parsers import GooseObj
-
+from models import transform, predict
+import numpy as np
 
 class Article(object):
 
@@ -37,6 +38,10 @@ class Article(object):
         self.author = None
         self.is_parsed = False
         self.is_downloaded = False
+        self.category = None
+
+        self.model = np.load('model.npy').item()
+        self.mapping = np.load('dictionary.npy').item()
 
     def build(self):
         # Build a lone article from a URL independent of the source (newspaper).
@@ -78,6 +83,13 @@ class Article(object):
         if not self.is_downloaded or not self.is_parsed:
             raise Exception('You should download and parse first!')
         #Todo
+        tem = transform(self.text, self.mapping)
+        result = predict(self.model, tem)
+        self.set_category(result[0])
+
+    def set_category(self, cat):
+        mapping_list = ['tech','business','entertainment','politics','sport']
+        self.category = mapping_list[cat-1]
 
     def set_text(self,text):
         self.text = text
