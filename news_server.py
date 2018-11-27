@@ -24,7 +24,7 @@ def create_app():
     client = pymongo.MongoClient("mongodb+srv://news:123@cluster0-avowj.mongodb.net/test?retryWrites=true")
     db = client["newsapp"]
     # Refresh main page when starting server, use this code
-    #update_index(db)
+    update_index(db)
 
     def interrupt():
         global refreshThread
@@ -57,10 +57,10 @@ def create_app():
     @app.route('/')
     def index():
         if 'username' in session:
-            index_articles = db["index_articles"]
+            index_articles = db["articles"]
             articles = []
-            for item in index_articles.find({}, {
-                "_id": 0,
+            for item in index_articles.find({'is_index': 1}, {
+                "_id": 1,
                 'source': 1,
                 'title': 1,
                 'url': 1,
@@ -82,6 +82,30 @@ def create_app():
                 return redirect(url_for('index'))
             payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
+            raw_json = r.json()
+            index_articles = db["articles"]
+            index_articles.delete_many({'is_index': 1})
+            for item in raw_json['articles']:
+                article = Article(item['url'])
+                article.build()
+                index_articles.insert_one({
+                    'source': article.source_url,
+                    'title': article.title,
+                    'url': article.url,
+                    'topImage': article.top_image,
+                    'text': article.text,
+                    'keywords': article.keywords,
+                    'tags': article.tags,
+                    'category': article.category,
+                    'time': article.time,
+                    'is_index': 1
+                })
+
+
+
+
+
+
             articles = []
             # TODO: make into Article objects as in update_index()
             # This way, we can also have the time value for articles from search.
@@ -99,15 +123,20 @@ def create_app():
     @app.route('/add-history', methods=['POST'])
     def add_history():
         if 'username' in session:
-            # TODO: add data (URL to article? time?) to user history in MongoDB
-            print("clicked: ", request.form['url'])
-            print(request.form['mins'], " mins")
-            time =  [({'date':date.today().strftime('%m-%d-%y'), 'mins': request.form['mins']})]
+            user_history = db["user_history"]
+            time = {'username': session['username'],'article_id':request.form['id'],'date':date.today().strftime('%m-%d-%y')}
+            user_history.insert_one(time)
         return 'You are not logged in'
 
     @app.route('/analytics')
     def analytics():
+        user_history = db["user_history"]
+        index_articles = db["user_history"]
         times = []
+        #for items in user_history.find({'username':session['username']}):
+
+
+
         times.append({'date': date.today().strftime('%m-%d-%y'), 'mins': 40})
         yesterday = date.today() - timedelta(1)
         times.append({'date': yesterday.strftime('%m-%d-%y'), 'mins': 50})
@@ -174,8 +203,8 @@ def update_index(db):
     payload = {'country': 'US', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
     r = requests.get('https://newsapi.org/v2/top-headlines', params=payload)
     raw_json = r.json()
-    index_articles = db["index_articles"]
-    index_articles.delete_many({})
+    index_articles = db["articles"]
+    index_articles.delete_many({'is_index': 1})
     for item in raw_json['articles']:
         article = Article(item['url'])
         article.build()
@@ -188,7 +217,8 @@ def update_index(db):
             'keywords':article.keywords,
             'tags': article.tags,
             'category': article.category,
-            'time': article.time
+            'time': article.time,
+            'is_index': 1
             })
     print('update finished!')
 
