@@ -39,9 +39,7 @@ def create_app():
     def search():
         if 'username' in session:
             payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
-            print('AAAAAAAAAAA')
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
-            print('BBBBBBBBBB')
             articles = []
             # TODO: make into Article objects as in update_index()
             # This way, we can also have the time value for articles from search.

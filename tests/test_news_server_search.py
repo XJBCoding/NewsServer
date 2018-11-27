@@ -1,11 +1,9 @@
 import os
 import tempfile
 from flask import url_for, request, Response, session
-#from werkzeug import ImmutableMultiDict
 from news_server import create_app
 import pytest
 import unittest
-import simplejson as json
 
 
 class FlaskClientTest(unittest.TestCase):
