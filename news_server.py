@@ -39,7 +39,9 @@ def create_app():
     def search():
         if 'username' in session:
             payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+            print('AAAAAAAAAAA')
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
+            print('BBBBBBBBBB')
             articles = []
             # TODO: make into Article objects as in update_index()
             # This way, we can also have the time value for articles from search.
@@ -56,11 +58,12 @@ def create_app():
 
     @app.route('/add-history', methods=['POST'])
     def add_history():
-        # if 'username' in session:
+        if 'username' in session:
             # TODO: add data (URL to article? time?) to user history in MongoDB
-        print("clicked: ", request.form['url'])
-        print(request.form['mins'], " mins")
-        # return 'You are not logged in'
+            print("clicked: ", request.form['url'])
+            print(request.form['mins'], " mins")
+            time =  [({'date':date.today().strftime('%m-%d-%y'), 'mins': request.form['mins']})]
+        return 'You are not logged in'
 
     @app.route('/analytics')
     def analytics():
