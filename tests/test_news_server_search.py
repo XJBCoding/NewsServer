@@ -54,7 +54,7 @@ class FlaskClientTest(unittest.TestCase):
     '''
     This is a test to make sure that the user can search by both keyword and source.
     '''
-    def test_search_source(self):
+    def test_search_keyword_and_source(self):
         with self.client.session_transaction() as sess:
             sess['username'] = True
 
