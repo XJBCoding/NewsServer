@@ -10,6 +10,9 @@ from datetime import date,timedelta
 class FlaskClientTest(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
+
+        self.app.config['SECRET_KEY'] = 'sekrit!'
+
         self.app_context = self.app.app_context()
         self.app_context.push()
         self.client = self.app.test_client()
@@ -17,15 +20,25 @@ class FlaskClientTest(unittest.TestCase):
     def tearDown(self):
         self.app_context.pop()
 
+    '''
+    This is a test to make sure that the user cannot view analytics without logging in
+    '''
+    def test_search_login(self):
+        resp = self.client.post('/analytics')
+        assert b'You are not logged in' in resp.data
+
     def test_add_history(self):
-        resp = self.client.post('/add-history', data={'url': 'test', 'mins': 2.3})
-        # print(resp.data)
+        with self.client.session_transaction() as sess:
+            sess['username'] = 'testing'
+
+        resp = self.client.post('/add-history', data={'id': '1234567'})
         # need to assert that the data is in MongoDB
-        assert True
+        assert b'Added article to DB' in resp.data
 
     def test_analytics_time(self):
         # TODO: after setting up MongoDB code, need to pass dummy data in database
-        # yesterday = date.today() - timedelta(1)
-        # times.append({'date': yesterday.strftime('%m-%d-%y'), 'mins': 50})
+        with self.client.session_transaction() as sess:
+            sess['username'] = 'testing'
+        
         resp = self.client.get('/analytics')
-        assert b'50 minutes' in resp.data
+        assert b'mins' or b'minutes' in resp.data
