@@ -78,7 +78,7 @@ def create_app():
     @app.route('/search', methods=['POST', 'GET'])
     def search():
         if 'username' in session:
-            if request.form['keyword'] == None or request.form['keyword'] == '':
+            if (request.form['keyword'] == None or request.form['keyword'] == '') and (request.form['sources'] == None or request.form['sources'] == ''):
                 return redirect(url_for('index'))
             payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
