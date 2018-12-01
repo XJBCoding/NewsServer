@@ -104,32 +104,33 @@ def create_app():
 
     @app.route('/analytics')
     def analytics():
-        user_history = db["user_history"]
-        time_result = []
-        times = {}
+        if 'username' in session:
+            user_history = db["user_history"]
+            time_result = []
+            times = {}
 
-        items = []
-        date_list = set()
-        category_list = {}
-        category_result = []
-        for item in user_history.find({'username':session['username']}):
-            date_list.add(item['date'])
-            items.append(item)
-            if item['category'] not in category_list.keys():
-                category_list[item['category']] = 1
-            else:
-                category_list[item['category']] += 1
-        for date in date_list:
-            times[date] = 0
-            for item in items:
-                if item['date'] == date:
-                    times[date] += float(item['mins'])
-        for key in times.keys():
-            time_result.append({'date': key, 'mins': times[key]})
-        for key in category_list.keys():
-            category_result.append({'category':key, 'times': category_list[key]})
-
-        return render_template('analytics.html', times= time_result,history = items,category = category_result)
+            items = []
+            date_list = set()
+            category_list = {}
+            category_result = []
+            for item in user_history.find({'username':session['username']}):
+                date_list.add(item['date'])
+                items.append(item)
+                if item['category'] not in category_list.keys():
+                    category_list[item['category']] = 1
+                else:
+                    category_list[item['category']] += 1
+            for date in date_list:
+                times[date] = 0
+                for item in items:
+                    if item['date'] == date:
+                        times[date] += float(item['mins'])
+            for key in times.keys():
+                time_result.append({'date': key, 'mins': times[key]})
+            for key in category_list.keys():
+                category_result.append({'category':key, 'times': category_list[key]})
+            return render_template('analytics.html', times= time_result,history = items,category = category_result)
+        return 'You are not logged in'
 
     @app.route('/login', methods=['POST', 'GET'])
     def login():

@@ -39,6 +39,5 @@ class FlaskClientTest(unittest.TestCase):
         # TODO: after setting up MongoDB code, need to pass dummy data in database
         with self.client.session_transaction() as sess:
             sess['username'] = 'testing'
-        
         resp = self.client.get('/analytics')
         assert b'mins' or b'minutes' in resp.data

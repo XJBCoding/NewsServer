@@ -49,13 +49,11 @@ class ArticleTestCase(unittest.TestCase):
         TOP_IMG = 'https://cdn.cnn.com/cnnnext/dam/assets/180925092633-03-iyw-wisniewski-trnds-large-169.jpg'
         TITLE = "4-year-old Florence didn't like sharing her name with a bad hurricane. So she did something about it."
         KEYWORDS = ['health', "4-year-old Florence didn't like sharing her name with a bad hurricane. So she did something about it. - CNN"]
-        AUTHOR = ['Christopher Dawson, CNN']
         self.article.download()
         self.article.parse()
-        assert self.article.top_image == TOP_IMG
+        assert self.article.topImage == TOP_IMG
         assert self.article.title == TITLE
         assert self.article.keywords == KEYWORDS
-        # assert self.article.author == AUTHOR
 
     def test_time_valid(self):
         self.article.download()
