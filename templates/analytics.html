@@ -11,6 +11,21 @@
 <div>
 	<p>{{ time.date }}: {{time.mins }} minutes<p>
 </div>
+{% endfor %}
+<h3>Topic...</h3>
+
+{%  for item in category %}
+<div>
+	<p>{{ item.category }}: {{item.times }}<p>
+</div>
+{% endfor %}
+<h3>Reading History...</h3>
+
+{%  for item in history %}
+<div>
+	<p>category: {{ item.category }}<p>
+    <p> {{item.url }}</p>
+    <p> {{item.mins }} minutes</p>
 {% endfor %} 
 
 

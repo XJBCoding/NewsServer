@@ -19,6 +19,7 @@ dataLock = threading.Lock()
 refreshThread = threading.Thread()
 
 def create_app():
+    print('create app')
     app = Flask(__name__)
     app.config.from_mapping(SECRET_KEY='sd*&^!@#*123987')
     client = pymongo.MongoClient("mongodb+srv://news:123@cluster0-avowj.mongodb.net/test?retryWrites=true")
@@ -47,11 +48,9 @@ def create_app():
         refreshThread = threading.Timer(POOL_TIME, doStuff, ())
         refreshThread.start()
 
-    # Refresh main page periodically, use this code
+    # Refresh main page periodically, enable this code
     #doStuffStart()
     #atexit.register(interrupt)
-
-
 
 
     @app.route('/')
@@ -68,7 +67,8 @@ def create_app():
                 'text': 1,
                 'keywords': 1,
                 'tags': 1,
-                'time': 1
+                'time': 1,
+                'category':1
                 }):
                 articles.append(item)
                 hot_word = trending() # hot_word is a dictionary, element:{word: weight}
@@ -82,41 +82,13 @@ def create_app():
                 return redirect(url_for('index'))
             payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
             r = requests.get('https://newsapi.org/v2/everything', params=payload)
-            raw_json = r.json()
-            index_articles = db["articles"]
-            index_articles.delete_many({'is_index': 1})
-            for item in raw_json['articles']:
-                article = Article(item['url'])
-                article.build()
-                index_articles.insert_one({
-                    'source': article.source_url,
-                    'title': article.title,
-                    'url': article.url,
-                    'topImage': article.top_image,
-                    'text': article.text,
-                    'keywords': article.keywords,
-                    'tags': article.tags,
-                    'category': article.category,
-                    'time': article.time,
-                    'is_index': 1
-                })
-
-
-
-
-
-
             articles = []
-            # TODO: make into Article objects as in update_index()
             # This way, we can also have the time value for articles from search.
             for obj in r.json()['articles']:
-                temp = {}
-                temp['title'] = obj['title']
-                temp['source'] = ''
-                temp['url'] = obj['url']
-                temp['topImage'] = obj['urlToImage']
-                temp['text'] = obj['content']
-                articles.append(temp)
+                article = Article(obj['url'])
+                article.build()
+                article.set_url(obj['url'])
+                articles.append(article)
             return render_template('articles.html', articles=articles)
         return 'You are not logged in'
 
@@ -124,24 +96,39 @@ def create_app():
     def add_history():
         if 'username' in session:
             user_history = db["user_history"]
-            time = {'username': session['username'],'article_id':request.form['id'],'date':date.today().strftime('%m-%d-%y')}
+            time = {'username': session['username'],'mins': request.form['mins'],'category': request.form['category'],\
+                    'url': request.form['url'], 'date':date.today().strftime('%m-%d-%y')}
             user_history.insert_one(time)
         return 'You are not logged in'
 
     @app.route('/analytics')
     def analytics():
         user_history = db["user_history"]
-        index_articles = db["user_history"]
-        times = []
-        #for items in user_history.find({'username':session['username']}):
+        time_result = []
+        times = {}
 
+        items = []
+        date_list = set()
+        category_list = {}
+        category_result = []
+        for item in user_history.find({'username':session['username']}):
+            date_list.add(item['date'])
+            items.append(item)
+            if item['category'] not in category_list.keys():
+                category_list[item['category']] = 1
+            else:
+                category_list[item['category']] += 1
+        for date in date_list:
+            times[date] = 0
+            for item in items:
+                if item['date'] == date:
+                    times[date] += float(item['mins'])
+        for key in times.keys():
+            time_result.append({'date': key, 'mins': times[key]})
+        for key in category_list.keys():
+            category_result.append({'category':key, 'times': category_list[key]})
 
-
-        times.append({'date': date.today().strftime('%m-%d-%y'), 'mins': 40})
-        yesterday = date.today() - timedelta(1)
-        times.append({'date': yesterday.strftime('%m-%d-%y'), 'mins': 50})
-        # return render_template('analytics.html')
-        return render_template('analytics.html', times=times)
+        return render_template('analytics.html', times= time_result,history = items,category = category_result)
 
     @app.route('/login', methods=['POST', 'GET'])
     def login():
@@ -206,20 +193,23 @@ def update_index(db):
     index_articles = db["articles"]
     index_articles.delete_many({'is_index': 1})
     for item in raw_json['articles']:
-        article = Article(item['url'])
-        article.build()
-        index_articles.insert_one({
-            'source': article.source_url,
-            'title': article.title,
-            'url': article.url,
-            'topImage':article.top_image,
-            'text':article.text,
-            'keywords':article.keywords,
-            'tags': article.tags,
-            'category': article.category,
-            'time': article.time,
-            'is_index': 1
-            })
+        try:
+            article = Article(item['url'])
+            article.build()
+            index_articles.insert_one({
+                'source': article.source_url,
+                'title': article.title,
+                'url': article.url,
+                'topImage':article.topImage,
+                'text':article.text,
+                'keywords':article.keywords,
+                'tags': article.tags,
+                'category': article.category,
+                'time': article.time,
+                'is_index': 1
+                })
+        except:
+            print('pass this article.')
     print('update finished!')
 
 # the code below is executed if the request method

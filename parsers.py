@@ -19,8 +19,8 @@ class GooseObj(object):
         self.title = goose_obj.title
         self.authors = goose_obj.authors
         if goose_obj.top_image:
-            self.top_image = goose_obj.top_image.src
+            self.topImage = goose_obj.top_image.src
         else:
-            self.top_image = None
+            self.topImage = None
         word_count = len(self.body_text.split())
         self.time = round(word_count/200.0,1)

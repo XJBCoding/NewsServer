@@ -24,13 +24,13 @@ class Article(object):
                 parsed_url = urlparse(scheme + '://' + url)
             source_url = scheme + '://' + parsed_url.netloc
             url = parsed_url.path
-            print(parsed_url)
+            #print(parsed_url)
             if parsed_url.netloc == '':
                 raise Exception('input do not have source!')
         self.url = url
         self.html = None
         self.source_url = source_url
-        self.top_image = None
+        self.topImage = None
         self.text = None
         self.keywords = None
         self.tags = None
@@ -43,11 +43,15 @@ class Article(object):
         self.model = np.load('model.npy').item()
         self.mapping = np.load('dictionary.npy').item()
 
+
     def build(self):
         # Build a lone article from a URL independent of the source (newspaper).
-        self.download()
-        self.parse()
-        self.nlp()
+        try:
+            self.download()
+            self.parse()
+            self.nlp()
+        except:
+            print('build failed')
 
     def download(self):
         print(self.source_url + self.url)
@@ -65,8 +69,8 @@ class Article(object):
         self.set_text(goose_obj.body_text)
         self.set_title(goose_obj.title)
         self.set_keywords(goose_obj.keywords)
-        if goose_obj.top_image:
-            self.set_top_image(goose_obj.top_image)
+        if goose_obj.topImage:
+            self.set_topImage(goose_obj.topImage)
         self.set_time(goose_obj.time)
         self.set_authors(goose_obj.authors)
         self.is_parsed = True
@@ -86,7 +90,6 @@ class Article(object):
         # keyword extraction wrapper
         if not self.is_downloaded or not self.is_parsed:
             raise Exception('You should download and parse first!')
-        #Todo
         tem = transform(self.text, self.mapping)
         result = predict(self.model, tem)
         self.set_category(result[0])
@@ -104,8 +107,8 @@ class Article(object):
     def set_keywords(self,keywords):
         self.keywords = keywords
 
-    def set_top_image(self,top_image):
-        self.top_image = top_image
+    def set_topImage(self,topImage):
+        self.topImage = topImage
 
     def set_authors(self,author):
         self.author = author
@@ -113,15 +116,7 @@ class Article(object):
     def set_time(self,time):
         self.time = time
 
-'''if __name__ == '__main__':
-    a = Article('www.cnn.com/2018/09/25/health/iyw-girl-named-florence-collects-donations-trnd/index.html')
-    a.build()
-    print('url:', a.url)
-    print('source_url:', a.source_url)
-    print('TOP_IMG:', a.top_img)
-    print('text:', a.text)
-    print('title:', a.title)
-    print('keywords:', a.keywords)
-    print('time:', a.time)
-    print('author:', a.author)'''
+    def set_url(self,url):
+        self.url = url
+
 

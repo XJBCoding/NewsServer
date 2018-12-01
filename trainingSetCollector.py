@@ -12,7 +12,7 @@ def collect(label,top_headlines,n):
                 f.write(body_text)
                 index[n]+=1
 
-newsapi=NewsApiClient(api_key='55ba7ad3fa444f5398a1d476cbf42b02')
+newsapi=NewsApiClient(api_key='55baad3fa444f5398a1d476cbf42b02')
 index=[1]*7
 label=['business','entertainment','sports','technology','health','science','general']
 
