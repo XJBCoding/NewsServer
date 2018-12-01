@@ -99,6 +99,7 @@ def create_app():
             time = {'username': session['username'],'mins': request.form['mins'],'category': request.form['category'],\
                     'url': request.form['url'], 'date':date.today().strftime('%m-%d-%y')}
             user_history.insert_one(time)
+            return 'Added article to DB'
         return 'You are not logged in'
 
     @app.route('/analytics')
