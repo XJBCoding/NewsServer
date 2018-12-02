@@ -53,6 +53,7 @@ class FlaskClientTest(unittest.TestCase):
 
         resp = self.client.get('/analytics')
         assert b'10 min' in resp.data
+        assert  str.encode(date.today().strftime('%m-%d-%y')) in resp.data
 
     def test_analytics_topic_with_history(self):
         username = self.user_with_history

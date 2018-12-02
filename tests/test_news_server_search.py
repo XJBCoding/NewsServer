@@ -83,6 +83,7 @@ class FlaskClientTest(unittest.TestCase):
 
         resp = self.client.post('/search', data={'keyword': '', 'sources': 'abc-news,cnn'})
         assert b'abcnews.go.com' or b'cnn.com' in resp.data
+
     '''
     This is a test to make sure that the user can search by both keyword and source.
     '''
@@ -93,3 +94,4 @@ class FlaskClientTest(unittest.TestCase):
         resp = self.client.post('/search', data={'keyword': 'Trump', 'sources': 'cnn'})
         assert b'rump' in resp.data
         assert b'cnn.com' in resp.data
+
