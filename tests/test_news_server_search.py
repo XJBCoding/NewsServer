@@ -90,6 +90,6 @@ class FlaskClientTest(unittest.TestCase):
         with self.client.session_transaction() as sess:
             sess['username'] = True
 
-        resp = self.client.post('/search', data={'keyword': 'trump', 'sources': 'cnn'})
+        resp = self.client.post('/search', data={'keyword': 'Trump', 'sources': 'cnn'})
         assert b'rump' in resp.data
         assert b'cnn.com' in resp.data

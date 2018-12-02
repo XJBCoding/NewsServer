@@ -39,22 +39,42 @@ class ModelTestCase(unittest.TestCase):
         self.a7 = Article(
             'https://www.thetimes.co.uk/article/nasa-probe-closes-in-on-asteroid-in-hunt-for-first-sample-2jx3mbx7x')
         self.a7.build()
+        
+        self.a8 = Article(
+            'https://www.aljazeera.com/news/2018/12/china-declare-trade-war-ceasefire-trump-xi-summit-181202031620261.html')
+        self.a8.build()
+
+        self.a9 = Article(
+            'https://www.dailymail.co.uk/news/article-6451239/You-lean-s-t-doesnt-work-Michelle-Obama-shocks-audience.html')
+        self.a9.build()
+
+        self.a10 = Article(
+            'https://www.theverge.com/2018/11/29/18116830/crispr-baby-he-jiankui-genetics-ethics-science-health-mutation')
+        self.a10.build()
 
     def tearDown(self):
         """called after all test cases finish of this unit"""
         pass
 
     def test_case1(self):
-        assert self.a1.category == 'entertainment'
+        assert self.a1.category == 'entertainment' 
     def test_case2(self):
-        assert self.a2.category == 'sports'
+        assert self.a2.category == 'sports' 
     def test_case3(self):
-        assert self.a3.category == 'sports'
+        assert self.a3.category == 'sports' 
     def test_case4(self):
-        assert self.a4.category == 'technology'
+        assert self.a4.category == 'technology' 
     def test_case5(self):
-        assert self.a5.category == 'business'
+        assert self.a5.category == 'business' 
     def test_case6(self):
-        assert self.a6.category == 'technology'
+        assert self.a6.category == 'technology' 
     def test_case7(self):
         assert self.a7.category == 'technology'
+
+    def test_case8(self):
+        assert self.a8.category == 'business'
+    def test_case9(self):
+        assert self.a9.category == 'entertainment' 
+    def test_case10(self):
+        assert self.a10.category == 'health'
+        
