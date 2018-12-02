@@ -1,4 +1,9 @@
 import os
+import sys
+TEST_DIR = os.path.abspath(os.path.dirname(__file__))
+PARENT_DIR = os.path.join(TEST_DIR, '..')
+sys.path.insert(0, PARENT_DIR)
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 import tempfile
 from flask import url_for
 from news_server import create_app

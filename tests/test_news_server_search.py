@@ -1,4 +1,9 @@
 import os
+import sys
+TEST_DIR = os.path.abspath(os.path.dirname(__file__))
+PARENT_DIR = os.path.join(TEST_DIR, '..')
+sys.path.insert(0, PARENT_DIR)
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 import tempfile
 from flask import url_for, request, Response, session
 from news_server import create_app
@@ -78,9 +83,6 @@ class FlaskClientTest(unittest.TestCase):
 
         resp = self.client.post('/search', data={'keyword': '', 'sources': 'abc-news,cnn'})
         assert b'abcnews.go.com' or b'cnn.com' in resp.data
-
-    
-
     '''
     This is a test to make sure that the user can search by both keyword and source.
     '''
@@ -88,6 +90,6 @@ class FlaskClientTest(unittest.TestCase):
         with self.client.session_transaction() as sess:
             sess['username'] = True
 
-        resp = self.client.post('/search', data={'keyword': 'migrant', 'sources': 'abc-news'})
-        assert b'igrant' in resp.data
+        resp = self.client.post('/search', data={'keyword': 'trump', 'sources': 'abc-news'})
+        assert b'rump' in resp.data
         assert b'abcnews.go.com' in resp.data

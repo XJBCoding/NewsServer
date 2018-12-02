@@ -13,11 +13,6 @@ from Article import Article
 
 
 class ArticleTestCase(unittest.TestCase):
-    # def runTest(self):
-    #     self.test_url()
-    #     self.test_source_url()
-    #     self.test_download_html()
-    #     self.test_parse_html_valid()
 
     def setUp(self):
         """called before the first test case of this unit begins"""
