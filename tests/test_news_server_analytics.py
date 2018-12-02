@@ -27,6 +27,7 @@ class FlaskClientTest(unittest.TestCase):
         self.db = mongo_client["newsapp"]
 
         self.user_with_history = 'testing_username_with_history'
+        self.user_with_history_2 = 'testing_username_with_history'
         self.user_no_history = 'testing_username_no_history'
 
     def tearDown(self):
@@ -44,6 +45,20 @@ class FlaskClientTest(unittest.TestCase):
         # need to assert that the data is in MongoDB
         assert b'Added article to DB' in resp.data
 
+    def test_add_history_2(self):
+        username = self.user_with_history_2
+        user_history = self.db["user_history"]
+        user_history.remove({'username':username})  # clear history from previous tests
+
+        with self.client.session_transaction() as sess:
+            sess['username'] = username
+
+        resp = self.client.post('/add-history', data={'mins': 10, 'category': 'health', 'url': '#'})
+        resp2 = self.client.post('/add-history', data={'mins': 20, 'category': 'technology', 'url': '#'})
+        # need to assert that the data is in MongoDB
+        assert b'Added article to DB' in resp.data
+        assert b'Added article to DB' in resp2.data
+
     def test_analytics_time_with_history(self):
         username = self.user_with_history
         user_history = self.db["user_history"]
@@ -53,7 +68,18 @@ class FlaskClientTest(unittest.TestCase):
 
         resp = self.client.get('/analytics')
         assert b'10 min' in resp.data
-        assert  str.encode(date.today().strftime('%m-%d-%y')) in resp.data
+        assert str.encode(date.today().strftime('%m-%d-%y')) in resp.data
+
+    def test_analytics_time_with_history_2(self):
+        username = self.user_with_history_2
+        user_history = self.db["user_history"]
+
+        with self.client.session_transaction() as sess:
+            sess['username'] = username
+
+        resp = self.client.get('/analytics')
+        assert b'30' in resp.data
+        assert str.encode(date.today().strftime('%m-%d-%y')) in resp.data
 
     def test_analytics_topic_with_history(self):
         username = self.user_with_history
@@ -64,6 +90,17 @@ class FlaskClientTest(unittest.TestCase):
 
         resp = self.client.get('/analytics')
         assert b'health' in resp.data
+
+    def test_analytics_topic_with_history_2(self):
+        username = self.user_with_history_2
+        user_history = self.db["user_history"]
+
+        with self.client.session_transaction() as sess:
+            sess['username'] = username
+
+        resp = self.client.get('/analytics')
+        assert b'health' in resp.data
+        assert b'technology' in resp.data
 
     def test_analytics_no_history(self):
         username = self.user_no_history
