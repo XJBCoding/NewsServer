@@ -14,7 +14,7 @@ from Article import Article
 
 class ModelTestCase(unittest.TestCase):
     def runTest(self):
-        self.test_model()
+        self.test_model_accuracy()
 
     def setUp(self):
         """called before the first test case of this unit begins"""
@@ -36,45 +36,61 @@ class ModelTestCase(unittest.TestCase):
         self.a6 = Article(
             'https://www.engadget.com/2018/12/01/amazon-music-android-tv/')
         self.a6.build()
+
         self.a7 = Article(
-            'https://www.thetimes.co.uk/article/nasa-probe-closes-in-on-asteroid-in-hunt-for-first-sample-2jx3mbx7x')
+            'http://www.kugn.com/news/model-for-american-girl-doll-reveals-rare-cancer-diagnosis/')
         self.a7.build()
-        
+
         self.a8 = Article(
-            'https://www.aljazeera.com/news/2018/12/china-declare-trade-war-ceasefire-trump-xi-summit-181202031620261.html')
+            'https://krtv.com/cnn-national/2018/12/02/the-cremated-remains-of-100-people-are-going-to-be-launched-into-space-on-a-spacex-rocket/')
         self.a8.build()
 
         self.a9 = Article(
-            'https://www.dailymail.co.uk/news/article-6451239/You-lean-s-t-doesnt-work-Michelle-Obama-shocks-audience.html')
+            'https://www.cnn.com/2018/12/02/us/elysium-space-memorial-launch/index.html')
         self.a9.build()
 
         self.a10 = Article(
-            'https://www.theverge.com/2018/11/29/18116830/crispr-baby-he-jiankui-genetics-ethics-science-health-mutation')
+            'https://www.thesun.ie/news/3466840/emergency-services-race-to-scene-of-crash-involving-several-cars-on-m50-in-dublin/')
         self.a10.build()
+
+
 
     def tearDown(self):
         """called after all test cases finish of this unit"""
         pass
 
-    def test_case1(self):
-        assert self.a1.category == 'entertainment' 
-    def test_case2(self):
-        assert self.a2.category == 'sports' 
-    def test_case3(self):
-        assert self.a3.category == 'sports' 
-    def test_case4(self):
-        assert self.a4.category == 'technology' 
-    def test_case5(self):
-        assert self.a5.category == 'business' 
-    def test_case6(self):
-        assert self.a6.category == 'technology' 
-    def test_case7(self):
-        assert self.a7.category == 'technology'
+    def test_model_accuracy(self):
+        count = 0
+        total_test = 10
+        
+        if self.a1.category == 'entertainment' :
+            count += 1
+        
+        if self.a2.category == 'sports':
+            count += 1
+        
+        if self.a3.category == 'sports':
+            count += 1
+        
+        if self.a4.category == 'technology':
+            count += 1
+        
+        if self.a5.category == 'business':
+            count += 1
+        
+        if self.a6.category == 'technology':
+            count += 1
 
-    def test_case8(self):
-        assert self.a8.category == 'business'
-    def test_case9(self):
-        assert self.a9.category == 'entertainment' 
-    def test_case10(self):
-        assert self.a10.category == 'health'
+        if self.a7.category == 'health':
+            count += 1
+        if self.a8.category == 'science':
+            count += 1
+        if self.a9.category == 'science':
+            count += 1
+
+        if self.a10.category == 'general':
+            count += 1
+
+        if count/total_test >= 0.8:
+            assert True
         
