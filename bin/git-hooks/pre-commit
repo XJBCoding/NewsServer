@@ -6,14 +6,8 @@ if [ "master" == "$branch" ]; then
 	echo "Running Pre-Commit"
 	today=`date '+%Y_%m_%d_%H:%M'`;
 
-	git checkout logs
 	pylint *.py | tee logs/pylint_log_$today.txt
 	py.test --cov=. tests/ | tee logs/pytest_log_$today.txt
-
-	# echo "Pushing logs"
-	# git commit -am "logs" -m $today
-	# git push origin:logs
-	# git checkout master
 
 	echo "Finish Pre-Commmit. Committing."
 fi
