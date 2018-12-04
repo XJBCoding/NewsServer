@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "Checking branch"
-branch=git rev-parse --abbrev-ref HEAD
+branch=$(git rev-parse --abbrev-ref HEAD)
 
 if [ "master" == "$branch" ]; then
 	echo "Running Pre-Commit"
@@ -10,10 +10,10 @@ if [ "master" == "$branch" ]; then
 	pylint *.py | tee logs/pylint_log_$today.txt
 	py.test --cov=. tests/ | tee logs/pytest_log_$today.txt
 
-	echo "Pushing logs"
-	git commit -am "logs" -m $today
-	git push origin:logs
-	git checkout master
+	# echo "Pushing logs"
+	# git commit -am "logs" -m $today
+	# git push origin:logs
+	# git checkout master
 
 	echo "Finish Pre-Commmit. Committing."
 fi
