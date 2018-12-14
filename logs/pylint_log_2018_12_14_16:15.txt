@@ -1,0 +1,528 @@
+************* Module Article
+C: 18, 0: No space allowed around keyword argument assignment
+    def __init__(self, url, source_url = ''):
+                                       ^ (bad-whitespace)
+C: 67, 0: No space allowed before bracket
+            print ('[REQUEST FAILED]')
+                  ^ (bad-whitespace)
+C: 78, 0: Exactly one space required after comma
+    def get_html(self,url):
+                     ^ (bad-whitespace)
+C: 86, 0: No space allowed before bracket
+            print ('[REQUEST FAILED]')
+                  ^ (bad-whitespace)
+C: 98, 0: Line too long (102/100) (line-too-long)
+C: 98, 0: Exactly one space required after comma
+        mapping_list = ['technology','business','entertainment','general','sports','health','science']
+                                    ^ (bad-whitespace)
+C: 98, 0: Exactly one space required after comma
+        mapping_list = ['technology','business','entertainment','general','sports','health','science']
+                                               ^ (bad-whitespace)
+C: 98, 0: Exactly one space required after comma
+        mapping_list = ['technology','business','entertainment','general','sports','health','science']
+                                                               ^ (bad-whitespace)
+C: 98, 0: Exactly one space required after comma
+        mapping_list = ['technology','business','entertainment','general','sports','health','science']
+                                                                         ^ (bad-whitespace)
+C: 98, 0: Exactly one space required after comma
+        mapping_list = ['technology','business','entertainment','general','sports','health','science']
+                                                                                  ^ (bad-whitespace)
+C: 98, 0: Exactly one space required after comma
+        mapping_list = ['technology','business','entertainment','general','sports','health','science']
+                                                                                           ^ (bad-whitespace)
+C:101, 0: Exactly one space required after comma
+    def set_text(self,text):
+                     ^ (bad-whitespace)
+C:104, 0: Exactly one space required after comma
+    def set_title(self,title):
+                      ^ (bad-whitespace)
+C:107, 0: Exactly one space required after comma
+    def set_keywords(self,keywords):
+                         ^ (bad-whitespace)
+C:110, 0: Exactly one space required after comma
+    def set_topImage(self,topImage):
+                         ^ (bad-whitespace)
+C:113, 0: Exactly one space required after comma
+    def set_authors(self,author):
+                        ^ (bad-whitespace)
+C:116, 0: Exactly one space required after comma
+    def set_time(self,time):
+                     ^ (bad-whitespace)
+C:119, 0: Exactly one space required after comma
+    def set_url(self,url):
+                    ^ (bad-whitespace)
+C:122, 0: Trailing newlines (trailing-newlines)
+C: 33, 8: Invalid attribute name "topImage" (invalid-name)
+C: 16, 0: Missing class docstring (missing-docstring)
+R: 16, 0: Too many instance attributes (15/7) (too-many-instance-attributes)
+R: 22,15: Comparison to literal (literal-comparison)
+C: 47, 4: Missing method docstring (missing-docstring)
+W: 53, 8: No exception type(s) specified (bare-except)
+C: 56, 4: Missing method docstring (missing-docstring)
+C: 61, 4: Missing method docstring (missing-docstring)
+W: 66, 8: No exception type(s) specified (bare-except)
+C: 78, 4: Missing method docstring (missing-docstring)
+W: 85, 8: No exception type(s) specified (bare-except)
+R: 78, 4: Method could be a function (no-self-use)
+C: 89, 4: Missing method docstring (missing-docstring)
+C: 97, 4: Missing method docstring (missing-docstring)
+C:101, 4: Missing method docstring (missing-docstring)
+C:104, 4: Missing method docstring (missing-docstring)
+C:107, 4: Missing method docstring (missing-docstring)
+C:110, 4: Invalid method name "set_topImage" (invalid-name)
+C:110, 4: Invalid argument name "topImage" (invalid-name)
+C:110, 4: Missing method docstring (missing-docstring)
+C:113, 4: Missing method docstring (missing-docstring)
+C:116, 4: Missing method docstring (missing-docstring)
+C:119, 4: Missing method docstring (missing-docstring)
+W:105, 8: Attribute 'title' defined outside __init__ (attribute-defined-outside-init)
+W:  8, 0: Unused import sys (unused-import)
+W:  9, 0: Unused import pymongo (unused-import)
+C: 10, 0: standard import "from urllib.parse import urlparse" should be placed before "import pymongo" (wrong-import-order)
+************* Module models
+C:  8, 0: Trailing whitespace (trailing-whitespace)
+C: 12, 0: Exactly one space required after comma
+from os.path import isfile,join
+                          ^ (bad-whitespace)
+C: 14, 0: Exactly one space required after comma
+def estimate_naive_bayes_classifier(X,Y):# X: data Y: labels
+                                     ^ (bad-whitespace)
+C: 19, 0: Trailing whitespace (trailing-whitespace)
+C: 26, 0: Exactly one space required after comma
+        cur_X = X[indices,:]
+                         ^ (bad-whitespace)
+C: 28, 0: Exactly one space required after comma
+        params['mu'][i] = (1 + np.sum(cur_X,axis = 0)) / (2 + cur_X.shape[0])
+                                           ^ (bad-whitespace)
+C: 28, 0: No space allowed around keyword argument assignment
+        params['mu'][i] = (1 + np.sum(cur_X,axis = 0)) / (2 + cur_X.shape[0])
+                                                 ^ (bad-whitespace)
+C: 30, 0: Trailing whitespace (trailing-whitespace)
+C: 31, 0: Exactly one space required after comma
+def predict(params,X):
+                  ^ (bad-whitespace)
+C: 33, 0: Exactly one space required after comma
+    part1 = np.log(params['pi'] * np.prod(1 - params['mu'],axis = 1))
+                                                          ^ (bad-whitespace)
+C: 33, 0: No space allowed around keyword argument assignment
+    part1 = np.log(params['pi'] * np.prod(1 - params['mu'],axis = 1))
+                                                                ^ (bad-whitespace)
+C: 34, 0: Exactly one space required after comma
+    part1 = np.tile(part1, (X.shape[0],1)).transpose()
+                                      ^ (bad-whitespace)
+C: 38, 0: Exactly one space required after comma
+    res = np.argmax(res,axis = 0) + 1
+                       ^ (bad-whitespace)
+C: 38, 0: No space allowed around keyword argument assignment
+    res = np.argmax(res,axis = 0) + 1
+                             ^ (bad-whitespace)
+C: 41, 0: Exactly one space required after comma
+def print_top_words(params,vocab):
+                          ^ (bad-whitespace)
+C: 53, 0: Exactly one space required after comma
+    print('top postive 20 words:',pos_vocab)
+                                 ^ (bad-whitespace)
+C: 54, 0: Exactly one space required after comma
+    print('top negtive 20 words:',neg_vocab)
+                                 ^ (bad-whitespace)
+C: 56, 0: Trailing whitespace (trailing-whitespace)
+C: 61, 0: Exactly one space required after comma
+    categories = ['technology','business','entertainment','general','sports','health','science']
+                              ^ (bad-whitespace)
+C: 61, 0: Exactly one space required after comma
+    categories = ['technology','business','entertainment','general','sports','health','science']
+                                         ^ (bad-whitespace)
+C: 61, 0: Exactly one space required after comma
+    categories = ['technology','business','entertainment','general','sports','health','science']
+                                                         ^ (bad-whitespace)
+C: 61, 0: Exactly one space required after comma
+    categories = ['technology','business','entertainment','general','sports','health','science']
+                                                                   ^ (bad-whitespace)
+C: 61, 0: Exactly one space required after comma
+    categories = ['technology','business','entertainment','general','sports','health','science']
+                                                                            ^ (bad-whitespace)
+C: 61, 0: Exactly one space required after comma
+    categories = ['technology','business','entertainment','general','sports','health','science']
+                                                                                     ^ (bad-whitespace)
+C: 63, 0: Exactly one space required after comma
+        mypath = join('./testSet',category)
+                                 ^ (bad-whitespace)
+C: 70, 0: Exactly one space required after comma
+                words = re.split(r'(\W)',tem)
+                                        ^ (bad-whitespace)
+C: 79, 0: Trailing whitespace (trailing-whitespace)
+C: 80, 0: Exactly one space required after comma
+    return (data,labels)
+                ^ (bad-whitespace)
+C:100, 0: Trailing whitespace (trailing-whitespace)
+C:100, 0: Exactly one space required after comma
+    return (log_idf,mapping)            
+                   ^ (bad-whitespace)
+C:102, 0: Exactly one space required after comma
+def tokenize(data,labels,mapping):
+                 ^ (bad-whitespace)
+C:102, 0: Exactly one space required after comma
+def tokenize(data,labels,mapping):
+                        ^ (bad-whitespace)
+C:103, 0: Exactly one space required after comma
+    labels_mapping = {'technology':0,'business':1,'entertainment':2,
+                                    ^ (bad-whitespace)
+C:103, 0: Exactly one space required after comma
+    labels_mapping = {'technology':0,'business':1,'entertainment':2,
+                                                 ^ (bad-whitespace)
+C:104, 0: Exactly one space required after comma
+                      'general':3,'sports':4,'health':5,'science':6}
+                                 ^ (bad-whitespace)
+C:104, 0: Exactly one space required after comma
+                      'general':3,'sports':4,'health':5,'science':6}
+                                            ^ (bad-whitespace)
+C:104, 0: Exactly one space required after comma
+                      'general':3,'sports':4,'health':5,'science':6}
+                                                       ^ (bad-whitespace)
+C:107, 0: Exactly one space required after comma
+    x = np.zeros((n,d), dtype='int')
+                   ^ (bad-whitespace)
+C:115, 0: Exactly one space required after comma
+    return (csc_matrix(x),y)
+                         ^ (bad-whitespace)
+C:117, 0: Exactly one space required after comma
+def transform(test_data,mapping):
+                       ^ (bad-whitespace)
+C:119, 0: Exactly one space required after comma
+    words = re.split(r'(\W)',test_data)
+                            ^ (bad-whitespace)
+C:124, 0: Trailing whitespace (trailing-whitespace)
+C:128, 0: No space allowed after bracket
+        vocab = [ x.strip() for x in f.readlines() ]
+                ^ (bad-whitespace)
+C:128, 0: No space allowed before bracket
+        vocab = [ x.strip() for x in f.readlines() ]
+                                                   ^ (bad-whitespace)
+C:131, 0: Trailing whitespace (trailing-whitespace)
+C:132, 0: Exactly one space required after comma
+    (data,labels) = load_data()
+         ^ (bad-whitespace)
+C:133, 0: Exactly one space required after comma
+    log_idf,mapping = construct_dic(data)
+           ^ (bad-whitespace)
+C:134, 0: Exactly one space required after comma
+    data,labels = tokenize(data,labels,mapping)
+        ^ (bad-whitespace)
+C:134, 0: Exactly one space required after comma
+    data,labels = tokenize(data,labels,mapping)
+                               ^ (bad-whitespace)
+C:134, 0: Exactly one space required after comma
+    data,labels = tokenize(data,labels,mapping)
+                                      ^ (bad-whitespace)
+C:135, 0: Exactly one space required after assignment
+    X_train, X_val, y_train, y_val =train_test_split(data, labels, test_size=0.2, random_state=1)
+                                   ^ (bad-whitespace)
+C:136, 0: Exactly one space required after comma
+    params1 = estimate_naive_bayes_classifier(X_train,y_train)
+                                                     ^ (bad-whitespace)
+C:137, 0: Exactly one space required after comma
+    pred = predict(params1,X_train) # predictions on training data
+                          ^ (bad-whitespace)
+C:138, 0: Exactly one space required after comma
+    val_pred = predict(params1,X_val) # predictions on test data
+                              ^ (bad-whitespace)
+C:139, 0: Trailing whitespace (trailing-whitespace)
+C:140, 0: Trailing whitespace (trailing-whitespace)
+C:  1, 0: Missing module docstring (missing-docstring)
+C: 14, 0: Invalid argument name "X" (invalid-name)
+C: 14, 0: Invalid argument name "Y" (invalid-name)
+C: 14, 0: Missing function docstring (missing-docstring)
+C: 16, 4: Invalid variable name "d" (invalid-name)
+C: 17, 4: Invalid variable name "y" (invalid-name)
+C: 26, 8: Invalid variable name "cur_X" (invalid-name)
+C: 31, 0: Invalid argument name "X" (invalid-name)
+C: 31, 0: Missing function docstring (missing-docstring)
+E: 33,12: Module 'numpy' has no 'log' member; maybe 'long'? (no-member)
+E: 35,12: Module 'numpy' has no 'log' member; maybe 'long'? (no-member)
+C: 41, 0: Missing function docstring (missing-docstring)
+E: 42,12: Module 'numpy' has no 'log' member; maybe 'long'? (no-member)
+C: 43, 4: Invalid variable name "a" (invalid-name)
+W: 59, 4: Redefining name 'data' from outer scope (line 132) (redefined-outer-name)
+W: 60, 4: Redefining name 'labels' from outer scope (line 132) (redefined-outer-name)
+C: 58, 0: Missing function docstring (missing-docstring)
+C: 64,12: Invalid variable name "f" (invalid-name)
+W: 77,12: No exception type(s) specified (bare-except)
+C: 72,23: Do not use `len(SEQUENCE)` as condition value (len-as-condition)
+W: 83, 4: Redefining name 'log_idf' from outer scope (line 133) (redefined-outer-name)
+W: 85, 4: Redefining name 'mapping' from outer scope (line 133) (redefined-outer-name)
+C: 82, 0: Missing function docstring (missing-docstring)
+C: 97, 4: Invalid variable name "D" (invalid-name)
+W:102,13: Redefining name 'data' from outer scope (line 132) (redefined-outer-name)
+W:102,18: Redefining name 'labels' from outer scope (line 132) (redefined-outer-name)
+W:102,25: Redefining name 'mapping' from outer scope (line 133) (redefined-outer-name)
+C:102, 0: Missing function docstring (missing-docstring)
+C:105, 4: Invalid variable name "n" (invalid-name)
+C:106, 4: Invalid variable name "d" (invalid-name)
+C:107, 4: Invalid variable name "x" (invalid-name)
+C:108, 4: Invalid variable name "y" (invalid-name)
+W:117,24: Redefining name 'mapping' from outer scope (line 133) (redefined-outer-name)
+C:117, 0: Missing function docstring (missing-docstring)
+C:126, 0: Missing function docstring (missing-docstring)
+C:127,31: Invalid variable name "f" (invalid-name)
+C:132, 5: Invalid constant name "data" (invalid-name)
+C:132,10: Invalid constant name "labels" (invalid-name)
+C:133, 4: Invalid constant name "log_idf" (invalid-name)
+C:133,12: Invalid constant name "mapping" (invalid-name)
+C:134, 4: Invalid constant name "data" (invalid-name)
+C:134, 9: Invalid constant name "labels" (invalid-name)
+C:135, 4: Invalid constant name "X_train" (invalid-name)
+C:135,13: Invalid constant name "X_val" (invalid-name)
+C:135,20: Invalid constant name "y_train" (invalid-name)
+C:135,29: Invalid constant name "y_val" (invalid-name)
+C:136, 4: Invalid constant name "params1" (invalid-name)
+C:137, 4: Invalid constant name "pred" (invalid-name)
+C:138, 4: Invalid constant name "val_pred" (invalid-name)
+W:  4, 0: Unused loadmat imported from scipy.io (unused-import)
+W:  6, 0: Unused import csv (unused-import)
+W: 12, 0: Unused isfile imported from os.path (unused-import)
+C:  6, 0: standard import "import csv" should be placed before "from scipy.io import loadmat" (wrong-import-order)
+C:  7, 0: standard import "import math" should be placed before "from scipy.io import loadmat" (wrong-import-order)
+C:  9, 0: standard import "import re" should be placed before "from scipy.io import loadmat" (wrong-import-order)
+C: 11, 0: standard import "from os import listdir" should be placed before "from scipy.io import loadmat" (wrong-import-order)
+C: 12, 0: standard import "from os.path import isfile, join" should be placed before "from scipy.io import loadmat" (wrong-import-order)
+C: 10, 0: Imports from package scipy are not grouped (ungrouped-imports)
+************* Module news_server
+C: 25, 0: Line too long (107/100) (line-too-long)
+C: 62, 0: Wrong hanging indentation before block (add 4 spaces).
+                "_id": 1,
+                ^   | (bad-continuation)
+C: 63, 0: Wrong hanging indentation before block (add 4 spaces).
+                'source': 1,
+                ^   | (bad-continuation)
+C: 64, 0: Wrong hanging indentation before block (add 4 spaces).
+                'title': 1,
+                ^   | (bad-continuation)
+C: 65, 0: Wrong hanging indentation before block (add 4 spaces).
+                'url': 1,
+                ^   | (bad-continuation)
+C: 66, 0: Wrong hanging indentation before block (add 4 spaces).
+                'topImage': 1,
+                ^   | (bad-continuation)
+C: 67, 0: Wrong hanging indentation before block (add 4 spaces).
+                'text': 1,
+                ^   | (bad-continuation)
+C: 68, 0: Wrong hanging indentation before block (add 4 spaces).
+                'keywords': 1,
+                ^   | (bad-continuation)
+C: 69, 0: Wrong hanging indentation before block (add 4 spaces).
+                'tags': 1,
+                ^   | (bad-continuation)
+C: 70, 0: Wrong hanging indentation before block (add 4 spaces).
+                'time': 1,
+                ^   | (bad-continuation)
+C: 71, 0: Wrong hanging indentation before block (add 4 spaces).
+                'category':1
+                ^   | (bad-continuation)
+C: 80, 0: No space allowed before bracket
+        print (request.form['keyword'])
+              ^ (bad-whitespace)
+C: 82, 0: Line too long (153/100) (line-too-long)
+C: 84, 0: Line too long (193/100) (line-too-long)
+C: 84, 0: Exactly one space required after comma
+            payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+                                                                                       ^ (bad-whitespace)
+C: 84, 0: Exactly one space required after comma
+            payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+                                                                                                       ^ (bad-whitespace)
+C: 84, 0: Exactly one space required after comma
+            payload = {'q': request.form['keyword'], 'sources': request.form['sources'],'language':'en','from': '2018-11-25','sortBy': 'relevancy', 'apiKey': 'eb4ad8625c5b4f57bb62f8c95601038a'}
+                                                                                                                            ^ (bad-whitespace)
+C:100, 0: Line too long (119/100) (line-too-long)
+C:100, 0: Exactly one space required after comma
+            time = {'username': session['username'],'mins': request.form['mins'],'category': request.form['category'],\
+                                                   ^ (bad-whitespace)
+C:100, 0: Exactly one space required after comma
+            time = {'username': session['username'],'mins': request.form['mins'],'category': request.form['category'],\
+                                                                                ^ (bad-whitespace)
+C:133, 0: Line too long (115/100) (line-too-long)
+C:133, 0: No space allowed after keyword argument assignment
+            return render_template('analytics.html', times= time_result,history = items,category = category_result)
+                                                          ^ (bad-whitespace)
+C:133, 0: Exactly one space required after comma
+            return render_template('analytics.html', times= time_result,history = items,category = category_result)
+                                                                       ^ (bad-whitespace)
+C:133, 0: No space allowed around keyword argument assignment
+            return render_template('analytics.html', times= time_result,history = items,category = category_result)
+                                                                                ^ (bad-whitespace)
+C:133, 0: Exactly one space required after comma
+            return render_template('analytics.html', times= time_result,history = items,category = category_result)
+                                                                                       ^ (bad-whitespace)
+C:133, 0: No space allowed around keyword argument assignment
+            return render_template('analytics.html', times= time_result,history = items,category = category_result)
+                                                                                                 ^ (bad-whitespace)
+C:153, 0: Line too long (110/100) (line-too-long)
+C:169, 0: Line too long (105/100) (line-too-long)
+C:181, 0: Exactly one space required around assignment
+        weight=100
+              ^ (bad-whitespace)
+C:182, 0: Line too long (109/100) (line-too-long)
+C:225, 0: Final newline missing (missing-final-newline)
+C:  1, 0: Missing module docstring (missing-docstring)
+C: 10, 0: Invalid constant name "articles" (invalid-name)
+C: 15, 0: Invalid constant name "commonDataStruct" (invalid-name)
+C: 17, 0: Invalid constant name "dataLock" (invalid-name)
+C: 19, 0: Invalid constant name "refreshThread" (invalid-name)
+W: 23, 4: Redefining name 'app' from outer scope (line 224) (redefined-outer-name)
+C: 21, 0: Missing function docstring (missing-docstring)
+C: 26, 4: Invalid variable name "db" (invalid-name)
+C: 30, 4: Missing function docstring (missing-docstring)
+W: 31, 8: Using the global statement (global-statement)
+C: 31, 8: Invalid constant name "refreshThread" (invalid-name)
+C: 34, 4: Invalid function name "doStuff" (invalid-name)
+C: 34, 4: Missing function docstring (missing-docstring)
+W: 35, 8: Using the global statement (global-statement)
+C: 35, 8: Invalid constant name "commonDataStruct" (invalid-name)
+W: 36, 8: Using the global statement (global-statement)
+C: 36, 8: Invalid constant name "refreshThread" (invalid-name)
+C: 44, 4: Invalid function name "doStuffStart" (invalid-name)
+C: 44, 4: Missing function docstring (missing-docstring)
+W: 46, 8: Using the global statement (global-statement)
+C: 46, 8: Invalid constant name "refreshThread" (invalid-name)
+W: 60,12: Redefining name 'articles' from outer scope (line 10) (redefined-outer-name)
+C: 57, 4: Missing function docstring (missing-docstring)
+W: 86,12: Redefining name 'articles' from outer scope (line 10) (redefined-outer-name)
+C: 79, 4: Missing function docstring (missing-docstring)
+C: 82,16: Comparison to None should be 'expr is None' (singleton-comparison)
+C: 82,87: Comparison to None should be 'expr is None' (singleton-comparison)
+C: 85,12: Invalid variable name "r" (invalid-name)
+C: 97, 4: Missing function docstring (missing-docstring)
+W:124,16: Redefining name 'date' from outer scope (line 6) (redefined-outer-name)
+C:107, 4: Missing function docstring (missing-docstring)
+C:129,23: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
+C:131,23: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
+C:137, 4: Missing function docstring (missing-docstring)
+R:138, 8: Unnecessary "else" after "return" (no-else-return)
+R:139,12: Unnecessary "else" after "return" (no-else-return)
+C:148, 4: Missing function docstring (missing-docstring)
+C:159, 4: Missing function docstring (missing-docstring)
+W: 30, 4: Unused variable 'interrupt' (unused-variable)
+W: 44, 4: Unused variable 'doStuffStart' (unused-variable)
+W: 57, 4: Unused variable 'index' (unused-variable)
+W: 79, 4: Unused variable 'search' (unused-variable)
+W: 97, 4: Unused variable 'add_history' (unused-variable)
+W:107, 4: Unused variable 'analytics' (unused-variable)
+W:137, 4: Unused variable 'login' (unused-variable)
+W:148, 4: Unused variable 'signup' (unused-variable)
+W:159, 4: Unused variable 'logout' (unused-variable)
+C:167, 0: Invalid argument name "db" (invalid-name)
+C:167, 0: Missing function docstring (missing-docstring)
+C:175, 0: Missing function docstring (missing-docstring)
+C:176, 4: Invalid variable name "TRENDING_URL" (invalid-name)
+C:177, 4: Invalid variable name "r" (invalid-name)
+C:191, 0: Invalid argument name "db" (invalid-name)
+C:191, 0: Missing function docstring (missing-docstring)
+C:194, 4: Invalid variable name "r" (invalid-name)
+W:214, 8: No exception type(s) specified (bare-except)
+C:224, 4: Invalid constant name "app" (invalid-name)
+W:  6, 0: Unused timedelta imported from datetime (unused-import)
+W:  8, 0: Unused import atexit (unused-import)
+C:  5, 0: standard import "from xml.etree import ElementTree" should be placed before "from flask import Flask, request, session, redirect, url_for, render_template" (wrong-import-order)
+C:  6, 0: standard import "from datetime import date, timedelta" should be placed before "from flask import Flask, request, session, redirect, url_for, render_template" (wrong-import-order)
+C:  7, 0: standard import "import threading" should be placed before "from flask import Flask, request, session, redirect, url_for, render_template" (wrong-import-order)
+C:  8, 0: standard import "import atexit" should be placed before "from flask import Flask, request, session, redirect, url_for, render_template" (wrong-import-order)
+************* Module parsers
+C: 26, 0: Exactly one space required after comma
+        self.time = round(word_count/200.0,1)
+                                          ^ (bad-whitespace)
+C: 22,12: Invalid attribute name "topImage" (invalid-name)
+C: 14, 8: Invalid variable name "g" (invalid-name)
+R: 11, 0: Too few public methods (0/2) (too-few-public-methods)
+************* Module trainingSetCollector
+C:  4, 0: Exactly one space required after comma
+def collect(label,top_headlines,n):
+                 ^ (bad-whitespace)
+C:  4, 0: Exactly one space required after comma
+def collect(label,top_headlines,n):
+                               ^ (bad-whitespace)
+C: 10, 0: No space allowed before :
+        if body_text :
+                     ^ (bad-whitespace)
+C: 11, 0: Exactly one space required after comma
+            with open('/Users/siyangyin/Desktop/testSet/'+label+'/'+str(index[n])+'.txt','w') as f:
+                                                                                        ^ (bad-whitespace)
+C: 13, 0: Exactly one space required around assignment
+                index[n]+=1
+                        ^^ (bad-whitespace)
+C: 15, 0: Exactly one space required around assignment
+newsapi=NewsApiClient(api_key='55baad3fa444f5398a1d476cbf42b02')
+       ^ (bad-whitespace)
+C: 16, 0: Exactly one space required around assignment
+index=[1]*7
+     ^ (bad-whitespace)
+C: 17, 0: Exactly one space required around assignment
+label=['business','entertainment','sports','technology','health','science','general']
+     ^ (bad-whitespace)
+C: 17, 0: Exactly one space required after comma
+label=['business','entertainment','sports','technology','health','science','general']
+                 ^ (bad-whitespace)
+C: 17, 0: Exactly one space required after comma
+label=['business','entertainment','sports','technology','health','science','general']
+                                 ^ (bad-whitespace)
+C: 17, 0: Exactly one space required after comma
+label=['business','entertainment','sports','technology','health','science','general']
+                                          ^ (bad-whitespace)
+C: 17, 0: Exactly one space required after comma
+label=['business','entertainment','sports','technology','health','science','general']
+                                                       ^ (bad-whitespace)
+C: 17, 0: Exactly one space required after comma
+label=['business','entertainment','sports','technology','health','science','general']
+                                                                ^ (bad-whitespace)
+C: 17, 0: Exactly one space required after comma
+label=['business','entertainment','sports','technology','health','science','general']
+                                                                          ^ (bad-whitespace)
+C: 19, 0: Line too long (108/100) (line-too-long)
+C: 19, 0: Exactly one space required after comma
+for number in range(6,3,-1):#{'business','entertainment','sports','technology','health','sciece','general'}:
+                     ^ (bad-whitespace)
+C: 19, 0: Exactly one space required after comma
+for number in range(6,3,-1):#{'business','entertainment','sports','technology','health','sciece','general'}:
+                       ^ (bad-whitespace)
+C: 20, 0: Exactly one space required after comma
+    for pageNumber in range(1,11):
+                             ^ (bad-whitespace)
+C: 21, 0: Exactly one space required after comma
+        for countryKind in {'gb','us','au','ca'}:
+                                ^ (bad-whitespace)
+C: 21, 0: Exactly one space required after comma
+        for countryKind in {'gb','us','au','ca'}:
+                                     ^ (bad-whitespace)
+C: 21, 0: Exactly one space required after comma
+        for countryKind in {'gb','us','au','ca'}:
+                                          ^ (bad-whitespace)
+C: 22, 0: Line too long (111/100) (line-too-long)
+C: 22, 0: Exactly one space required around assignment
+            top_headlines=newsapi.get_top_headlines(page=pageNumber,category=label[number],country=countryKind)
+                         ^ (bad-whitespace)
+C: 22, 0: Exactly one space required after comma
+            top_headlines=newsapi.get_top_headlines(page=pageNumber,category=label[number],country=countryKind)
+                                                                   ^ (bad-whitespace)
+C: 22, 0: Exactly one space required after comma
+            top_headlines=newsapi.get_top_headlines(page=pageNumber,category=label[number],country=countryKind)
+                                                                                          ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+            collect(label[number],top_headlines,number)
+                                 ^ (bad-whitespace)
+C: 23, 0: Exactly one space required after comma
+            collect(label[number],top_headlines,number)
+                                               ^ (bad-whitespace)
+C: 24, 0: Trailing newlines (trailing-newlines)
+C:  1, 0: Invalid module name "trainingSetCollector" (invalid-name)
+C:  1, 0: Missing module docstring (missing-docstring)
+W:  4,12: Redefining name 'label' from outer scope (line 17) (redefined-outer-name)
+W:  4,18: Redefining name 'top_headlines' from outer scope (line 22) (redefined-outer-name)
+C:  4, 0: Invalid argument name "n" (invalid-name)
+C:  4, 0: Missing function docstring (missing-docstring)
+C:  7, 8: Invalid variable name "g" (invalid-name)
+C: 11,97: Invalid variable name "f" (invalid-name)
+C: 15, 0: Invalid constant name "newsapi" (invalid-name)
+C: 16, 0: Invalid constant name "index" (invalid-name)
+C: 17, 0: Invalid constant name "label" (invalid-name)
+
+------------------------------------------------------------------
+Your code has been rated at 2.08/10 (previous run: 2.08/10, -0.01)
+
