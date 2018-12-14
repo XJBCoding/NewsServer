@@ -46,6 +46,13 @@ For pre-commit testing, set it up like so:
 ```
 ./bin/git-hooks/hook-setup.sh
 ```
+
+In order to correctly push logs, we have to make a local branch `logs`
+```
+git checkout -b logs
+git branch -u origin/logs
+```
+
 The process for commiting is as follows:
 ```
 git checkout master
