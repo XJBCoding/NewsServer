@@ -7,11 +7,24 @@
       <div id="trending" class="container">
         {% for word in hot_words %}
           {% if loop.index0 % 4 == 0 %} <div class="row"> {% endif %}
-          <div class="col-md-3 trending-word">{{ word }}</div>
+          <!-- <div class="col-md-3 trending-word">{{ word }}</div> -->
+          <form action="/search" method="POST" role="form" class="inline col-md-3 ">
+            <input type="hidden" name="sources" value="">
+            <input type="hidden" name="keyword" value="{{ word }}">
+            <button type="submit"  class="link-button">
+              <div class="trending-word">{{ word }}</div>
+            </button>
+          </form>
           {% if loop.index0 % 4 == 3 %} </div> {% endif %}
         {% endfor %}
     </div>
   {% endif %}
+
+  <script>
+  $(".trending-word").on("click", function() {
+    $.post('/search',)
+  })
+  </script>
 
   <h3>Or search for new articles...</h3>
     <form id="search-form" action="/search" method="POST" role="form" style="display: block;">

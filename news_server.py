@@ -77,6 +77,7 @@ def create_app():
 
     @app.route('/search', methods=['POST', 'GET'])
     def search():
+        print (request.form['keyword'])
         if 'username' in session:
             if (request.form['keyword'] == None or request.form['keyword'] == '') and (request.form['sources'] == None or request.form['sources'] == ''):
                 return redirect(url_for('index'))
