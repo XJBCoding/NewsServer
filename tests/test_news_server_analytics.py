@@ -27,7 +27,7 @@ class FlaskClientTest(unittest.TestCase):
         self.db = mongo_client["newsapp"]
 
         self.user_with_history = 'testing_username_with_history'
-        self.user_with_history_2 = 'testing_username_with_history'
+        self.user_with_history_2 = 'testing_username_with_history_2'
         self.user_no_history = 'testing_username_no_history'
 
     def tearDown(self):
